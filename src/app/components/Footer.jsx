@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
 import { Github, Linkedin, Instagram } from "lucide-react";
+import { useThemeContext } from "../context/ThemeContext";
 
-export default function Footer({ darkMode, navItems, scrollToSection }) {
+export default function Footer({ navItems, scrollToSection }) {
+  const { isDarkMode: darkMode } = useThemeContext(); // 🔥 shared global theme
+
   return (
     <footer
       className={`py-12 ${
@@ -20,19 +25,15 @@ export default function Footer({ darkMode, navItems, scrollToSection }) {
               with cutting-edge technology and beautiful design.
             </p>
             <div className="flex space-x-4">
-              {[
-                { icon: <Github className="w-5 h-5" />, href: "#" },
-                { icon: <Linkedin className="w-5 h-5" />, href: "#" },
-                { icon: <Instagram className="w-5 h-5" />, href: "#" },
-              ].map((social, index) => (
+              {[Github, Linkedin, Instagram].map((Icon, index) => (
                 <a
                   key={index}
-                  href={social.href}
+                  href="#"
                   className={`p-2 rounded-lg transition-colors ${
                     darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
                   }`}
                 >
-                  {social.icon}
+                  <Icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
@@ -80,7 +81,7 @@ export default function Footer({ darkMode, navItems, scrollToSection }) {
             darkMode ? "border-gray-800" : "border-gray-200"
           } text-center`}
         >
-          <p>{darkMode ? "© 2025 Vexel. All rights reserved." : "© 2025 Vexel. All rights reserved."}</p>
+          <p>© 2025 Vexel. All rights reserved.</p>
         </div>
       </div>
     </footer>
