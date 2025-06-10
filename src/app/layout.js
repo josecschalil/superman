@@ -8,8 +8,8 @@ import React from "react";
 import Footer from "./components/Footer";
 
 const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "Explore Presets", href: "#showcase" },
+  { name: "Home", href: "#/" },
+  { name: "Explore", href: "/explore" },
   { name: "About", href: "#about" },
   { name: "Pricing", href: "#pricing" },
   { name: "Support", href: "#contact" },
