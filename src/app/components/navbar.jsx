@@ -2,11 +2,14 @@
 
 import { Transition } from "@headlessui/react";
 import { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X } from "lucide-react"; // You can replace this with your preferred icon library
+import { Sun, Moon, Menu, X } from "lucide-react";
+import { useThemeContext } from "../context/ThemeContext";
 
-const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
+const NavBar = ({ navItems, onMobileMenuToggle }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showNavbar, setShowNavbar] = useState(true); // 👈 state to control navbar visibility
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  const { isDarkMode: darkMode, toggleTheme: toggleDarkMode } = useThemeContext(); // 👈 Use context
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -17,16 +20,15 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY === 0) {
-        setShowNavbar(true); // show when at top
+        setShowNavbar(true);
       } else if (currentScrollY > lastScrollY) {
-        setShowNavbar(false); // scrolling down, hide
+        setShowNavbar(false);
       } else {
-        setShowNavbar(true); // scrolling up, show
+        setShowNavbar(true);
       }
 
       lastScrollY = currentScrollY;
 
-      // Hide navbar after idle (no scroll) for 2s
       timeout = setTimeout(() => {
         if (window.scrollY !== 0) setShowNavbar(false);
       }, 2000);
@@ -42,7 +44,7 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
   const toggleMobileMenu = () => {
     const newState = !mobileMenuOpen;
     setMobileMenuOpen(newState);
-    onMobileMenuToggle?.(newState); // Notify parent
+    onMobileMenuToggle?.(newState);
   };
 
   const scrollToSection = (id) => {
@@ -66,14 +68,12 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
     >
       <div className="px-6 py-3">
         <div className="flex items-center justify-between space-x-8">
-          {/* Logo */}
           <div className="flex-shrink-0">
             <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               lg.presets
             </h1>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:block">
             <div className="flex items-center space-x-1">
               {navItems.map((item) => (
@@ -92,9 +92,7 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
             </div>
           </div>
 
-          {/* Right Side Controls */}
           <div className="flex items-center gap-4">
-            {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
               className={`p-2 rounded-xl transition-all duration-200 hover:scale-110 ${
@@ -103,14 +101,9 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
                   : "hover:bg-gray-100/60 text-gray-700"
               }`}
             >
-              {darkMode ? (
-                <Moon className="w-5 h-5" />
-              ) : (
-                <Sun className="w-5 h-5" />
-              )}
+              {darkMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
 
-            {/* CTA - Desktop Only */}
             <div className="hidden lg:block">
               <button
                 onClick={() => scrollToSection("#contact")}
@@ -120,7 +113,6 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="lg:hidden">
               <button
                 onClick={toggleMobileMenu}
@@ -130,11 +122,7 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
                     : "hover:bg-gray-100/60 text-gray-700"
                 }`}
               >
-                {mobileMenuOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Menu className="w-5 h-5" />
-                )}
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
@@ -151,12 +139,11 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
         leaveTo="opacity-0 -translate-y-2"
       >
         <div
-          className={`lg:hidden absolute top-full left-0 right-0 mt-2
-      ${
-        darkMode
-          ? "bg-gray-900/70 backdrop-blur-2xl border-gray-700/50"
-          : "bg-white/70 backdrop-blur-2xl border-gray-200/50"
-      } border rounded-2xl shadow-lg overflow-hidden`}
+          className={`lg:hidden absolute top-full left-0 right-0 mt-2 ${
+            darkMode
+              ? "bg-gray-900/70 backdrop-blur-2xl border-gray-700/50"
+              : "bg-white/70 backdrop-blur-2xl border-gray-200/50"
+          } border rounded-2xl shadow-lg overflow-hidden`}
         >
           <div className="px-4 py-3 space-y-1">
             {navItems.map((item) => (
@@ -175,7 +162,7 @@ const NavBar = ({ navItems, darkMode, toggleDarkMode, onMobileMenuToggle }) => {
                 {item.name}
               </button>
             ))}
-            <div className="pt-2 ">
+            <div className="pt-2">
               <button
                 onClick={() => {
                   scrollToSection("#contact");

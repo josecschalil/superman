@@ -2,7 +2,9 @@
 import { useEffect, useState } from "react";
 import "./globals.css";
 import NavBar from "./components/navbar";
-import { useDarkMode } from "./hooks/darkMode";
+import { ThemeProvider } from "./context/ThemeContext";
+import useTheme from "./hooks/darkMode";
+import React from "react";
 import Footer from "./components/Footer";
 
 const navItems = [
@@ -14,7 +16,7 @@ const navItems = [
 ];
 
 export default function RootLayout({ children }) {
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollToSection = (href) => {
@@ -26,26 +28,27 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className={darkMode ? "dark" : ""}>
+    <html lang="en" className={isDarkMode ? "dark" : ""}>
       <body>
-        <div className="overflow-x-hidden">
-          <NavBar
-            navItems={navItems}
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
-            onMobileMenuToggle={setIsMobileMenuOpen}
-          />
-          {isMobileMenuOpen && (
-            <div className="fixed inset-0 z-40 backdrop-blur-sm bg-black/30 transition-all duration-300" />
-          )}
-          {children}
-
-          <Footer
-            darkMode={darkMode}
-            navItems={navItems}
-            scrollToSection={scrollToSection}
-          />
-        </div>
+        <ThemeProvider>
+          <div className="overflow-x-hidden">
+            <NavBar
+              navItems={navItems}
+              darkMode={isDarkMode}
+              toggleDarkMode={toggleTheme}
+              onMobileMenuToggle={setIsMobileMenuOpen}
+            />
+            {isMobileMenuOpen && (
+              <div className="fixed inset-0 z-40 backdrop-blur-sm bg-black/30 transition-all duration-300" />
+            )}
+            {children}
+            <Footer
+              darkMode={isDarkMode}
+              navItems={navItems}
+              scrollToSection={scrollToSection}
+            />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

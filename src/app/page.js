@@ -1,25 +1,14 @@
-"use client";
+'use client';
 
-import React from "react";
-import Hero from "./components/Hero";
-import { useDarkMode } from "./hooks/darkMode";
+import { useThemeContext } from './context/ThemeContext';
+import Hero from './components/Hero';
 
-const HomePage = () => {
-  const { darkMode, isMounted } = useDarkMode();
-
-  if (!isMounted) {
-    return null; // Or a loading skeleton
-  }
+export default function HomePage() {
+  const { isDarkMode } = useThemeContext();
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        darkMode ? "dark bg-gray-900 text-white" : "bg-white text-gray-900"
-      }`}
-    >
-      <Hero darkMode={darkMode} />
+    <div className="min-h-screen transition-colors duration-300">
+      <Hero darkMode={isDarkMode} />
     </div>
   );
-};
-
-export default HomePage;
+}

@@ -1,39 +1,31 @@
-"use client";
+// hooks/useTheme.js
+import { useEffect, useState } from 'react';
 
-import { useState, useEffect } from "react";
-
-export const useDarkMode = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  const updateDarkMode = (newMode) => {
-    setDarkMode(newMode);
-    localStorage.setItem("darkMode", String(newMode));
-    document.documentElement.classList.toggle("dark", newMode);
-  };
+export default function useTheme() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-    const savedMode = localStorage.getItem("darkMode") === "true";
-    updateDarkMode(savedMode);
-
-    const handleStorageChange = (e) => {
-      if (e.key === "darkMode") {
-        const newMode = e.newValue === "true";
-        updateDarkMode(newMode);
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
   }, []);
 
-  const toggleDarkMode = () => {
-    updateDarkMode(!darkMode);
+  const toggleTheme = () => {
+    const newTheme = !isDarkMode;
+    setIsDarkMode(newTheme);
+    if (newTheme) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.classList.remove('dark');
+    }
   };
 
-  return { darkMode, toggleDarkMode, isMounted };
-};
+  return { isDarkMode, toggleTheme };
+}
