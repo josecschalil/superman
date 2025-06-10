@@ -1,7 +1,11 @@
+"use client";
 import React from "react";
 import { Star, Download, Play, Heart, Share2 } from "lucide-react";
+import { useThemeContext } from "../context/ThemeContext";
 
-const CardGrid = ({ darkMode }) => {
+const CardGrid = ({}) => {
+  const { isDarkMode: darkMode } = useThemeContext();
+  console.log("Current theme mode:", darkMode ? "dark" : "light");
   const cardData = [
     {
       id: 1,
@@ -69,21 +73,26 @@ const CardGrid = ({ darkMode }) => {
       downloads: "18K+",
     },
   ];
-
   return (
     <section
-      className={`py-8 sm:py-16 px-4 sm:px-6 lg:px-8 ${
+      className={`py-8 sm:py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-500 ${
         darkMode
           ? "bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900"
           : "bg-gradient-to-br from-blue-50 to-white"
       }`}
     >
-      <br /> <br /> <br />
+      <br />
+      <br />
+      <br />
       <div className="max-w-7xl mx-auto w-full">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-16 px-2">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-            <span className={`${darkMode ? "text-gray-100" : "text-gray-900"}`}>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 transition-colors duration-300">
+            <span
+              className={`transition-colors duration-300 ${
+                darkMode ? "text-gray-100" : "text-gray-900"
+              }`}
+            >
               Our Premium
             </span>
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
@@ -92,7 +101,7 @@ const CardGrid = ({ darkMode }) => {
           </h2>
           <div className="w-20 sm:w-24 h-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-4 sm:mb-6"></div>
           <p
-            className={`text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed ${
+            className={`text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
@@ -109,8 +118,8 @@ const CardGrid = ({ darkMode }) => {
                 key={card.id}
                 className={`group relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border backdrop-blur-lg aspect-square w-full ${
                   darkMode
-                    ? "bg-gray-800/20 border-gray-700/20 hover:bg-gray-800/30"
-                    : "bg-white/60 border-white/30 hover:bg-white/80"
+                    ? "bg-gray-800/30 border-gray-700/30 hover:bg-gray-800/40 shadow-gray-900/20"
+                    : "bg-white/70 border-white/40 hover:bg-white/90 shadow-gray-900/10"
                 }`}
               >
                 {/* Image Section */}
@@ -122,10 +131,19 @@ const CardGrid = ({ darkMode }) => {
                   />
 
                   {/* Image Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div
+                    className={`absolute inset-0 transition-opacity duration-300 ${
+                      darkMode
+                        ? "bg-gradient-to-t from-gray-900/30 to-transparent opacity-0 group-hover:opacity-100"
+                        : "bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100"
+                    }`}
+                  ></div>
 
                   {/* Top Actions */}
                   <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex space-x-1 sm:space-x-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    <button className="p-1.5 sm:p-2 rounded-full bg-white/90 hover:bg-white transition-colors duration-200">
+                      <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-gray-700 hover:text-red-500" />
+                    </button>
                     <button className="p-1.5 sm:p-2 rounded-full bg-white/90 hover:bg-white transition-colors duration-200">
                       <Share2 className="w-3 h-3 sm:w-4 sm:h-4 text-gray-700" />
                     </button>
@@ -144,14 +162,14 @@ const CardGrid = ({ darkMode }) => {
                   {/* Title and Description */}
                   <div className="mb-2 sm:mb-4">
                     <h3
-                      className={`text-base sm:text-lg font-semibold mb-1 sm:mb-2 line-clamp-1 ${
+                      className={`text-base sm:text-lg font-semibold mb-1 sm:mb-2 line-clamp-1 transition-colors duration-300 ${
                         darkMode ? "text-gray-100" : "text-gray-900"
                       }`}
                     >
                       {card.title}
                     </h3>
                     <p
-                      className={`text-xs sm:text-sm leading-relaxed line-clamp-2 ${
+                      className={`text-xs sm:text-sm leading-relaxed line-clamp-2 transition-colors duration-300 ${
                         darkMode ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
@@ -166,7 +184,7 @@ const CardGrid = ({ darkMode }) => {
                       <div className="flex items-center space-x-1">
                         <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
                         <span
-                          className={`text-xs sm:text-sm font-medium ${
+                          className={`text-xs sm:text-sm font-medium transition-colors duration-300 ${
                             darkMode ? "text-gray-300" : "text-gray-700"
                           }`}
                         >
@@ -175,12 +193,12 @@ const CardGrid = ({ darkMode }) => {
                       </div>
                       <div className="flex items-center space-x-1">
                         <Download
-                          className={`w-3 h-3 sm:w-4 sm:h-4 ${
+                          className={`w-3 h-3 sm:w-4 sm:h-4 transition-colors duration-300 ${
                             darkMode ? "text-gray-400" : "text-gray-500"
                           }`}
                         />
                         <span
-                          className={`text-xs sm:text-sm ${
+                          className={`text-xs sm:text-sm transition-colors duration-300 ${
                             darkMode ? "text-gray-400" : "text-gray-500"
                           }`}
                         >
@@ -188,16 +206,17 @@ const CardGrid = ({ darkMode }) => {
                         </span>
                       </div>
                     </div>
-
-                    {/* Action Button */}
-                    <button className="p-1.5 sm:p-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300">
-                      <Play className="w-3 h-3 sm:w-4 sm:h-4" />
-                    </button>
                   </div>
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-tr from-blue-600/5 to-purple-600/5"></div>
+                <div
+                  className={`absolute inset-0 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${
+                    darkMode
+                      ? "bg-gradient-to-tr from-blue-600/10 to-purple-600/10"
+                      : "bg-gradient-to-tr from-blue-600/5 to-purple-600/5"
+                  }`}
+                ></div>
               </div>
             );
           })}

@@ -5,12 +5,14 @@ import { Github, Linkedin, Instagram } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
 
 export default function Footer({ navItems, scrollToSection }) {
-  const { isDarkMode: darkMode } = useThemeContext(); // 🔥 shared global theme
+  const { isDarkMode: darkMode } = useThemeContext();
 
   return (
     <footer
       className={`py-12 ${
-        darkMode ? "bg-gray-900 border-gray-800 text-gray-300" : "bg-gray-50 border-gray-200 text-gray-600"
+        darkMode
+          ? "bg-gray-900 border-gray-800 text-gray-300"
+          : "bg-gray-50 border-gray-200 text-gray-600"
       } border-t`}
     >
       <div className="max-w-7xl w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,7 +21,11 @@ export default function Footer({ navItems, scrollToSection }) {
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
               Vexel
             </h3>
-            <p className={`mb-6 max-w-md ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+            <p
+              className={`mb-6 max-w-md ${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
               Creating digital experiences that drive results. From custom
               websites to full-stack applications, we bring your vision to life
               with cutting-edge technology and beautiful design.
@@ -40,7 +46,11 @@ export default function Footer({ navItems, scrollToSection }) {
           </div>
 
           <div>
-            <h4 className={`font-semibold mb-4 ${darkMode ? "text-gray-300" : "text-gray-800"}`}>
+            <h4
+              className={`font-semibold mb-4 ${
+                darkMode ? "text-gray-300" : "text-gray-800"
+              }`}
+            >
               Quick Links
             </h4>
             <ul className="space-y-2">
@@ -62,10 +72,18 @@ export default function Footer({ navItems, scrollToSection }) {
           </div>
 
           <div className="text-right sm:text-left">
-            <h4 className={`font-semibold mb-4 ${darkMode ? "text-gray-300" : "text-gray-800"}`}>
+            <h4
+              className={`font-semibold mb-4 ${
+                darkMode ? "text-gray-300" : "text-gray-800"
+              }`}
+            >
               Services
             </h4>
-            <ul className={`${darkMode ? "text-gray-300" : "text-gray-600"} space-y-2`}>
+            <ul
+              className={`${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              } space-y-2`}
+            >
               <li>Custom Websites</li>
               <li>Full-Stack Development</li>
               <li>Responsive Design</li>
