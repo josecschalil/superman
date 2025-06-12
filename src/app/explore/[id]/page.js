@@ -39,10 +39,8 @@ const ProductDetailPage = () => {
     downloads: "15.2k",
     images: [
       "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-
       "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-
       "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
     ],
     variants: [
@@ -193,9 +191,42 @@ const ProductDetailPage = () => {
       <br />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Mobile-first header section */}
+        <div className="lg:hidden space-y-4 mb-8">
+          <div className="flex items-center gap-3">
+            <span
+              className={`px-3 py-1 text-xs font-medium rounded-full ${
+                isDarkMode
+                  ? "bg-blue-900 text-blue-300"
+                  : "bg-blue-100 text-blue-800"
+              }`}
+            >
+              Trending
+            </span>
+            <span
+              className={`px-3 py-1 text-xs font-medium rounded-full ${
+                isDarkMode
+                  ? "bg-green-900 text-green-300"
+                  : "bg-green-100 text-green-800"
+              }`}
+            >
+              Best Seller
+            </span>
+          </div>
+
+          <h1
+            className={`text-4xl sm:text-4xl font-bold ${themeClasses.text} leading-tight`}
+          >
+            {product.name}
+          </h1>
+          <p className={`text-lg ${themeClasses.textSecondary}`}>
+            {product.subtitle}
+          </p>
+        </div>
+
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 items-start">
           {/* Image Gallery */}
-          <div className="space-y-6">
+          <div className="order-2 lg:order-1 space-y-6">
             <div className="relative group">
               <div
                 className={`relative aspect-square overflow-hidden rounded-2xl border ${themeClasses.cardBg}`}
@@ -279,8 +310,9 @@ const ProductDetailPage = () => {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-8">
-            <div className="space-y-4">
+          <div className="order-1 lg:order-2 space-y-8">
+            {/* Hide these elements on mobile since we moved them above */}
+            <div className="hidden lg:block space-y-4">
               <div className="flex items-center gap-3">
                 <span
                   className={`px-3 py-1 text-xs font-medium rounded-full ${
