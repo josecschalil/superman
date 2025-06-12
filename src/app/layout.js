@@ -10,9 +10,9 @@ import Footer from "./components/Footer";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Explore", href: "/explore" },
-  { name: "About", href: "#about" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Support", href: "#contact" },
+  { name: "About", href: "/about" },
+  { name: "Guide", href: "/guide" },
+  { name: "Support", href: "/support" },
 ];
 
 export default function RootLayout({ children }) {
