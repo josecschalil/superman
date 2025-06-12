@@ -2,10 +2,17 @@
 import React from "react";
 import { Star, Download, Play, Heart, Share2 } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
-
+import { useRouter } from "next/navigation";
 const CardGrid = ({}) => {
   const { isDarkMode: darkMode } = useThemeContext();
   console.log("Current theme mode:", darkMode ? "dark" : "light");
+  const router = useRouter();
+
+  // Function to handle card click
+  const handleCardClick = (productId) => {
+    router.push(`explore/${productId}`);
+  };
+
   const cardData = [
     {
       id: 1,
@@ -115,6 +122,7 @@ const CardGrid = ({}) => {
           {cardData.map((card) => {
             return (
               <div
+                onClick={() => handleCardClick(card.id)}
                 key={card.id}
                 className={`group relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl border backdrop-blur-lg aspect-square w-full ${
                   darkMode
