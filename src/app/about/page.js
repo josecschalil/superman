@@ -99,7 +99,7 @@ const AboutUs = () => {
               >
                 Crafting Visual
               </span>
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent py-1">
                 Excellence
               </span>
             </h1>

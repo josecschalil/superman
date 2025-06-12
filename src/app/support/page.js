@@ -135,7 +135,7 @@ const ContactUs = () => {
               Get In Touch
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight ">
               <span
                 className={`block ${
                   darkMode ? "text-gray-100" : "text-gray-900"
@@ -143,13 +143,13 @@ const ContactUs = () => {
               >
                 Let's Create
               </span>
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent py-1">
                 Together
               </span>
             </h1>
 
             <p
-              className={`text-xl leading-relaxed max-w-3xl mx-auto ${
+              className={`text-xl leading-relaxed max-w-3xl mx-auto font-bold${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
@@ -511,56 +511,6 @@ const ContactUs = () => {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2
-              className={`text-3xl font-bold mb-4 ${
-                darkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Frequently Asked Questions
-            </h2>
-            <p
-              className={`text-lg ${
-                darkMode ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
-              Find quick answers to common questions
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className={`p-6 rounded-2xl backdrop-blur-sm border ${
-                  darkMode
-                    ? "bg-gray-800/20 border-gray-700/30"
-                    : "bg-white/50 border-white/50"
-                }`}
-              >
-                <h3
-                  className={`text-lg font-semibold mb-3 ${
-                    darkMode ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {faq.question}
-                </h3>
-                <p
-                  className={`leading-relaxed ${
-                    darkMode ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
