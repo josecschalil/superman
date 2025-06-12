@@ -226,7 +226,10 @@ const NavBar = ({ navItems, onMobileMenuToggle }) => {
                   }`}
                   role="menuitem"
                   aria-current={pathname === item.href ? "page" : undefined}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onMobileMenuToggle?.(false);
+                  }}
                 >
                   {item.name}
                 </Link>
@@ -234,7 +237,11 @@ const NavBar = ({ navItems, onMobileMenuToggle }) => {
             )}
             <div className="pt-2">
               <button
-                onClick={() => scrollToSection("#contact")}
+                onClick={() => {
+                  scrollToSection("#contact");
+                  setMobileMenuOpen(false);
+                  onMobileMenuToggle?.(false);
+                }}
                 className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
                 role="menuitem"
               >
