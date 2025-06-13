@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { useThemeContext } from "../../context/ThemeContext";
-
 import {
   Star,
   Heart,
@@ -19,7 +17,7 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-
+import { useThemeContext } from "@/app/context/ThemeContext";
 const ProductDetailPage = () => {
   // State for UI interactions
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -224,9 +222,93 @@ const ProductDetailPage = () => {
           </p>
         </div>
 
+        {/* Mobile Image Gallery - Show first on mobile */}
+        <div className="lg:hidden space-y-6 mb-8">
+          <div className="relative group">
+            <div
+              className={`relative aspect-square overflow-hidden rounded-2xl border ${themeClasses.cardBg}`}
+            >
+              <img
+                src={product.images[activeImageIndex]}
+                alt={`${product.name} - Image ${activeImageIndex + 1}`}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <button
+                onClick={prevImage}
+                className={`absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-xl ${themeClasses.cardBg} opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110`}
+              >
+                <ChevronLeft className={`w-5 h-5 ${themeClasses.text}`} />
+              </button>
+              <button
+                onClick={nextImage}
+                className={`absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-xl ${themeClasses.cardBg} opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110`}
+              >
+                <ChevronRight className={`w-5 h-5 ${themeClasses.text}`} />
+              </button>
+
+              <div
+                className={`absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 p-2 rounded-xl ${themeClasses.cardBg}`}
+              >
+                {product.images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveImageIndex(index)}
+                    className={`transition-all duration-300 rounded-full ${
+                      index === activeImageIndex
+                        ? "bg-blue-600 w-6 h-2"
+                        : "bg-gray-400 hover:bg-gray-300 w-2 h-2"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Thumbnail gallery */}
+          <div className="grid grid-cols-4 gap-3">
+            {product.images.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveImageIndex(index)}
+                className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                  index === activeImageIndex
+                    ? "border-blue-600 scale-[1.02]"
+                    : "border-gray-300 hover:scale-[1.02] opacity-70 hover:opacity-100"
+                }`}
+              >
+                <img
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile Stats */}
+          <div
+            className={`grid grid-cols-3 gap-4 p-6 rounded-2xl border ${themeClasses.cardBg}`}
+          >
+            {product.stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <stat.icon
+                  className={`w-6 h-6 mx-auto mb-2 ${themeClasses.accent}`}
+                />
+                <div className={`text-xl font-bold ${themeClasses.text}`}>
+                  {stat.value}
+                </div>
+                <div className={`text-sm ${themeClasses.textMuted}`}>
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 items-start">
-          {/* Image Gallery */}
-          <div className="order-2 lg:order-1 space-y-6">
+          {/* Desktop Image Gallery */}
+          <div className="hidden lg:block order-2 lg:order-1 space-y-6">
             <div className="relative group">
               <div
                 className={`relative aspect-square overflow-hidden rounded-2xl border ${themeClasses.cardBg}`}
@@ -268,7 +350,7 @@ const ProductDetailPage = () => {
               </div>
             </div>
 
-            {/* Thumbnail gallery */}
+            {/* Desktop Thumbnail gallery */}
             <div className="grid grid-cols-4 gap-3">
               {product.images.map((image, index) => (
                 <button
@@ -289,7 +371,7 @@ const ProductDetailPage = () => {
               ))}
             </div>
 
-            {/* Stats */}
+            {/* Desktop Stats */}
             <div
               className={`grid grid-cols-3 gap-4 p-6 rounded-2xl border ${themeClasses.cardBg}`}
             >
