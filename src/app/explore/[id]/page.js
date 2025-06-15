@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { use, useState, useEffect } from "react";
 import {
   Star,
   Heart,
@@ -18,28 +18,84 @@ import {
   Moon,
 } from "lucide-react";
 import { useThemeContext } from "@/app/context/ThemeContext";
-const ProductDetailPage = () => {
+const ProductDetailPage = ({ params }) => {
   // State for UI interactions
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState("pro");
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const { isDarkMode } = useThemeContext();
+  const [presets, setPresets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const unwrappedParams = use(params);
+  const id = unwrappedParams.id;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/preset-packs/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch presets");
+        }
+        console.log("Response status:", response.status);
+        const data = await response.json();
+        setPresets(data);
+      } catch (error) {
+        console.error("Failed to fetch presets", error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div
+        className={`flex justify-center items-center h-screen transition-colors duration-500 ${
+          isDarkMode ? "bg-gray-900" : "bg-blue-50"
+        }`}
+      >
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div
+        className={`flex justify-center items-center h-screen transition-colors duration-500 ${
+          isDarkMode ? "bg-gray-900" : "bg-blue-50"
+        }`}
+      >
+        <div className="text-center py-8 text-red-500">
+          Error loading presets: {error}
+        </div>
+      </div>
+    );
+  }
   // Static product data
+  console.log("Presets data:", presets);
   const product = {
-    name: "Nature Moody Lightroom Presets",
-    subtitle: "Premium Lightroom Presets for Modern Creators",
-    price: 49.99,
-    originalPrice: 79.99,
+    name: presets.title || "Aurora Preset Collection",
+    subtitle: presets.subtitle || "Transform Your Photos with Stunning Presets",
+    price: presets.discountedPrice || 49.99,
+    originalPrice: presets.price || 79.99,
     rating: 4.9,
     reviewCount: 2847,
     downloads: "15.2k",
     images: [
-      "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
+      presets.imageLink1 ||
+        "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
+      presets.imageLink2 ||
+        "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
+      presets.imageLink3 ||
+        "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
+      presets.imageLink4 ||
+        "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
     ],
     variants: [
       {
@@ -457,9 +513,9 @@ const ProductDetailPage = () => {
             <div className={`p-6 rounded-2xl border ${themeClasses.cardBg}`}>
               <div className="flex items-center gap-4 mb-6">
                 <span className={`text-3xl font-bold ${themeClasses.text}`}>
-                  ${selectedVariantData.price}
+                  ${product.price}
                 </span>
-                {product.originalPrice > selectedVariantData.price && (
+                {product.originalPrice > product.price && (
                   <span
                     className={`text-lg line-through ${themeClasses.textMuted}`}
                   >
@@ -467,7 +523,13 @@ const ProductDetailPage = () => {
                   </span>
                 )}
                 <span className="px-3 py-1 text-sm bg-green-600 text-white font-bold rounded-lg">
-                  -{selectedVariantData.savings}%
+                  -
+                  {(
+                    ((product.originalPrice - product.price) /
+                      product.originalPrice) *
+                    100
+                  ).toFixed(0)}
+                  %
                 </span>
               </div>
               <div className="space-y-4 mx-auto my-7">
@@ -476,9 +538,8 @@ const ProductDetailPage = () => {
                     isDarkMode ? "text-gray-300" : ""
                   }`}
                 >
-                  Elevate your photos and videos with our premium presets and
-                  LUTs designed to transform your edits into stunning,
-                  professional-grade art. Fast, easy, and endlessly inspiring.
+                  {presets.description ||
+                    "This preset collection includes a variety of styles to enhance your photography, from vibrant landscapes to moody portraits. Perfect for both beginners and professionals."}
                 </p>
               </div>
               {/* Buy Buttons */}
@@ -488,8 +549,7 @@ const ProductDetailPage = () => {
                 >
                   <ShoppingCart className="w-5 h-5" />
                   <span>
-                    Buy Now - $
-                    {(selectedVariantData.price * quantity).toFixed(2)}
+                    Buy Now - ${(product.price * quantity).toFixed(2)}
                   </span>
                 </button>
 

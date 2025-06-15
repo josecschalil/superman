@@ -38,24 +38,41 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null); // Reset any previous status
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus("success");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-        category: "general",
+    try {
+      const response = await fetch("/api/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-      // Reset success message after 5 seconds
+      if (response.ok) {
+        setSubmitStatus("success");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          category: "general",
+        });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+
+      // Reset status message after 5 seconds
       setTimeout(() => {
         setSubmitStatus(null);
       }, 5000);
-    }, 2000);
+    }
   };
 
   const contactMethods = [
@@ -246,6 +263,15 @@ const ContactUs = () => {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-green-600 font-medium">
                       Message sent successfully! We'll get back to you soon.
+                    </span>
+                  </div>
+                )}
+                {submitStatus === "error" && (
+                  <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center space-x-3">
+                    <AlertCircle className="w-5 h-5 text-red-500" />
+                    <span className="text-red-600 font-medium">
+                      Something went wrong. Please try again or contact us
+                      directly.
                     </span>
                   </div>
                 )}
