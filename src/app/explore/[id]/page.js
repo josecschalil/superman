@@ -496,7 +496,7 @@ const ProductDetailPage = () => {
                 <button
                   className={`w-full px-6 py-4 border-2 font-semibold rounded-xl transition-all duration-300 ${themeClasses.buttonSecondary}`}
                 >
-                  Add to Cart
+                  Explore More
                 </button>
               </div>
             </div>
