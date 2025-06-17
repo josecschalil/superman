@@ -13,36 +13,94 @@ export default function DownloadConfirmPage() {
   const [error, setError] = useState(null);
   const [presetid, setPresetid] = useState(null);
   const [isClient, setIsClient] = useState(false);
-
+  const [hasMailSent, setMailFlag] = useState(false);
   useEffect(() => {
     setIsClient(true);
     if (typeof window !== "undefined") {
       const id = localStorage.getItem("preset");
       setPresetid(id);
+      localStorage.removeItem(`downloaded_${id}`);
     }
   }, []);
+
+  const handleMail = async (link, name) => {
+    const sentMail = localStorage.getItem("downloadEmail");
+    try {
+      const downloadData = {
+        email: sentMail,
+        presetId: presetid + " - " + name,
+      };
+      const response = await fetch("/api/download-marker", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(downloadData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to save log");
+      }
+
+      const result = await response.json();
+      console.log("Download log saved:", result);
+    } catch (error) {
+      console.error("Error creating download log:", error);
+      alert("Error saving log: " + error.message);
+    }
+
+    try {
+      const mailData = {
+        type: "download",
+        downloadLink: link,
+        fileName: name || "Preset Pack",
+        recipientEmail: sentMail,
+      };
+
+      const response = await fetch("/api/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mailData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send email");
+      }
+
+      console.log("Mail sent successfully");
+      setMailFlag(true);
+      return true;
+    } catch (error) {
+      console.error("Email sending failed:", error.message);
+      return false;
+    }
+  };
 
   useEffect(() => {
     if (!isClient || !presetid) return;
 
-    const fetchDownloadData = async () => {
+    const fetchAndProcessDownload = async () => {
       try {
         const response = await fetch(`/api/preset-packs/${presetid}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch download data");
-        }
+        if (!response.ok) throw new Error("Failed to fetch download data");
+
         const data = await response.json();
         setDownloadLink(data.downloadLink);
         setFileName(data.title || "preset-pack");
+
+        if (!hasMailSent) {
+          await handleMail(data.downloadLink, data.title || "preset-pack");
+        }
       } catch (error) {
-        console.error("Failed to fetch download data", error);
+        console.error("Download error:", error);
         setError(error.message);
       }
     };
 
-    if (!localStorage.getItem(`downloaded_${presetid}`)) {
-      fetchDownloadData();
-    }
+    fetchAndProcessDownload();
   }, [presetid, isClient]);
 
   const startDownload = () => {
@@ -58,17 +116,10 @@ export default function DownloadConfirmPage() {
     setDownloadStarted(true);
     localStorage.setItem(`downloaded_${presetid}`, "true");
     localStorage.removeItem("preset");
-    setPresetid(null);
   };
 
   useEffect(() => {
-    if (
-      !isClient ||
-      !presetid ||
-      !downloadLink ||
-      localStorage.getItem(`downloaded_${presetid}`)
-    )
-      return;
+    if (!isClient || !presetid || !downloadLink) return;
 
     if (countdown > 0) {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
@@ -81,7 +132,7 @@ export default function DownloadConfirmPage() {
   if (!isClient) {
     return (
       <div
-        className={`flex justify-center items-center h-screen transition-colors duration-500 ${
+        className={`flex justify-center items-center h-screen ${
           isDarkMode ? "bg-gray-900" : "bg-blue-50"
         }`}
       >
@@ -93,7 +144,7 @@ export default function DownloadConfirmPage() {
   if (error) {
     return (
       <div
-        className={`flex justify-center items-center h-screen transition-colors duration-500 ${
+        className={`flex justify-center items-center h-screen ${
           isDarkMode ? "bg-gray-900" : "bg-blue-50"
         }`}
       >
@@ -107,7 +158,7 @@ export default function DownloadConfirmPage() {
   if (!presetid) {
     return (
       <div
-        className={`flex justify-center items-center h-screen transition-colors duration-500 ${
+        className={`flex justify-center items-center h-screen ${
           isDarkMode ? "bg-gray-900" : "bg-blue-50"
         }`}
       >
@@ -130,7 +181,7 @@ export default function DownloadConfirmPage() {
               ? "Your download has been started. Check your downloads folder."
               : "No active download found. Please return to the product page."}
           </p>
-          {downloadStarted && downloadLink && (
+          {downloadStarted && (
             <button
               onClick={startDownload}
               className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium ${
@@ -148,22 +199,20 @@ export default function DownloadConfirmPage() {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 ${
+      className={`min-h-screen ${
         isDarkMode
-          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white"
-          : "bg-gradient-to-br from-blue-50 via-white to-indigo-50 text-gray-900"
+          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
+          : "bg-gradient-to-br from-blue-50 via-white to-indigo-50"
       }`}
     >
-      {/* Main Content */}
       <div className="flex items-center justify-center min-h-screen px-4">
         <div
-          className={`max-w-md w-full text-center p-8 rounded-2xl transition-all duration-300 ${
+          className={`max-w-md w-full text-center p-8 rounded-2xl ${
             isDarkMode
-              ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700"
-              : "bg-white/70 backdrop-blur-sm border border-gray-200 shadow-xl"
+              ? "bg-gray-800/50 border border-gray-700"
+              : "bg-white/70 border border-gray-200 shadow-xl"
           }`}
         >
-          {/* Success Icon */}
           <div className="mb-6">
             <CheckCircle
               className={`w-16 h-16 mx-auto ${
@@ -172,7 +221,6 @@ export default function DownloadConfirmPage() {
             />
           </div>
 
-          {/* Title */}
           <h1
             className={`text-2xl font-bold mb-4 ${
               isDarkMode ? "text-white" : "text-gray-900"
@@ -181,7 +229,6 @@ export default function DownloadConfirmPage() {
             Payment Successful!
           </h1>
 
-          {/* Download Status */}
           <div className="mb-6">
             {!downloadStarted ? (
               <div>
@@ -205,7 +252,7 @@ export default function DownloadConfirmPage() {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                       <div
-                        className={`h-2 rounded-full transition-all duration-1000 ${
+                        className={`h-2 rounded-full ${
                           isDarkMode ? "bg-blue-400" : "bg-blue-600"
                         }`}
                         style={{ width: `${((3 - countdown) / 3) * 100}%` }}
@@ -227,14 +274,13 @@ export default function DownloadConfirmPage() {
             )}
           </div>
 
-          {/* Manual Download Button */}
           {downloadLink && (
             <button
               onClick={startDownload}
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 ${
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium ${
                 isDarkMode
-                  ? "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/25"
-                  : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl"
+                  ? "bg-blue-600 text-white shadow-blue-600/25"
+                  : "bg-blue-600 text-white"
               }`}
             >
               <Download className="w-5 h-5" />
@@ -244,7 +290,6 @@ export default function DownloadConfirmPage() {
             </button>
           )}
 
-          {/* Additional Info */}
           <p
             className={`text-sm mt-6 ${
               isDarkMode ? "text-gray-400" : "text-gray-500"
@@ -255,28 +300,6 @@ export default function DownloadConfirmPage() {
               : "Please wait while we prepare your download..."}
           </p>
         </div>
-      </div>
-
-      {/* Floating Animation Elements */}
-      <div className="hidden md:block absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className={`absolute top-1/4 left-1/4 w-32 h-32 rounded-full opacity-20 animate-pulse ${
-            isDarkMode ? "bg-blue-500" : "bg-blue-300"
-          }`}
-          style={{ animationDelay: "0s", animationDuration: "4s" }}
-        />
-        <div
-          className={`absolute top-3/4 right-1/4 w-24 h-24 rounded-full opacity-20 animate-pulse ${
-            isDarkMode ? "bg-purple-500" : "bg-purple-300"
-          }`}
-          style={{ animationDelay: "2s", animationDuration: "4s" }}
-        />
-        <div
-          className={`absolute top-1/2 right-1/3 w-16 h-16 rounded-full opacity-20 animate-pulse ${
-            isDarkMode ? "bg-green-500" : "bg-green-300"
-          }`}
-          style={{ animationDelay: "1s", animationDuration: "4s" }}
-        />
       </div>
     </div>
   );

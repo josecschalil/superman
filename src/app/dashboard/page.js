@@ -2,7 +2,7 @@
 import React from "react";
 import { User, Shield, LogOut, Upload, ExternalLink } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
-import VisitorCounter from "@/app/components/visitorCounter";
+import DownloadsList from "../components/client-list";
 const DashboardPage = () => {
   const { user, logout } = useAuth();
 
@@ -73,11 +73,7 @@ const DashboardPage = () => {
               </h3>
             </div>
             <div className="px-6 py-4">
-              <p className="text-gray-600 mb-6">
-                This content is only visible to authenticated users. You can
-                check authentication status from any component using the useAuth
-                hook.
-              </p>
+              <DownloadsList />
 
               {/* Button for hyperlink */}
               <div className="space-y-4">

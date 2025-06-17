@@ -41,37 +41,58 @@ const ContactUs = () => {
     setSubmitStatus(null); // Reset any previous status
 
     try {
+      // Prepare the request data according to new API structure
+      const mailData = {
+        type: "contact",
+        name: formData.name,
+        email: "Josecschalil@gmail.com",
+        subject: formData.subject,
+        message: formData.message,
+        category: formData.category,
+      };
+
       const response = await fetch("/api/send-mail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(mailData),
       });
 
-      if (response.ok) {
-        setSubmitStatus("success");
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-          category: "general",
-        });
-      } else {
-        setSubmitStatus("error");
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.error || "Failed to submit form");
       }
+
+      setSubmitStatus("success");
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        category: "general",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitStatus("error");
+      // Log detailed error info
+      console.error("Submission error details:", {
+        error: error.message,
+        formData: formData,
+        timestamp: new Date().toISOString(),
+      });
     } finally {
       setIsSubmitting(false);
 
       // Reset status message after 5 seconds
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setSubmitStatus(null);
       }, 5000);
+
+      // Clean up timer if component unmounts
+      return () => clearTimeout(timer);
     }
   };
 

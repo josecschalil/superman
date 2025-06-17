@@ -69,7 +69,7 @@ const EmailModalComponent = ({ price, preset }) => {
         if (verifyResult.success) {
           router.push("/confirm-payment");
         } else {
-          alert("⚠️ Payment verification failed.");
+          alert("Payment verification failed.");
         }
       },
 
@@ -141,7 +141,7 @@ const EmailModalComponent = ({ price, preset }) => {
       return;
     }
     // Handle email submission here
-    localStorage.setItem("email", email);
+    localStorage.setItem("downloadEmail", email);
     localStorage.setItem("preset", preset);
     handlePayment();
     setEmail("");
