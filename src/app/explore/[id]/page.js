@@ -19,6 +19,8 @@ import {
   Moon,
 } from "lucide-react";
 import { useThemeContext } from "@/app/context/ThemeContext";
+import EmailModalComponent from "@/app/components/EmailModal";
+
 const ProductDetailPage = ({ params }) => {
   // State for UI interactions
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -32,6 +34,7 @@ const ProductDetailPage = ({ params }) => {
   const unwrappedParams = use(params);
   const id = unwrappedParams.id;
   const router = useRouter();
+
   const handleExplore = () => {
     router.push("/explore");
   };
@@ -85,6 +88,7 @@ const ProductDetailPage = ({ params }) => {
   // Static product data
   console.log("Presets data:", presets);
   const product = {
+    preset: presets.id,
     name: presets.title || "Aurora Preset Collection",
     subtitle: presets.subtitle || "Transform Your Photos with Stunning Presets",
     price: presets.discountedPrice || 49.99,
@@ -547,16 +551,13 @@ const ProductDetailPage = ({ params }) => {
                     "This preset collection includes a variety of styles to enhance your photography, from vibrant landscapes to moody portraits. Perfect for both beginners and professionals."}
                 </p>
               </div>
+
               {/* Buy Buttons */}
               <div className="space-y-3 px-3">
-                <button
-                  className={`w-full px-6 py-4 ${themeClasses.button} text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg flex items-center justify-center gap-2`}
-                >
-                  <ShoppingCart className="w-5 h-5" />
-                  <span>
-                    Buy Now - ${(product.price * quantity).toFixed(2)}
-                  </span>
-                </button>
+                <EmailModalComponent
+                  price={product.price}
+                  preset={product.preset}
+                />
 
                 <button
                   onClick={handleExplore}
