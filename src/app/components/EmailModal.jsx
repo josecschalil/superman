@@ -3,12 +3,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { X, Mail } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
 import { loadRazorpayScript } from "@/lib/razorpay";
-
+import { useRouter } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 const EmailModalComponent = ({ price, preset }) => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
   const [email, setEmail] = useState("");
+  const router = useRouter();
   const [isValidEmail, setIsValidEmail] = useState(true);
 
   const handlePayment = async () => {
@@ -19,30 +20,57 @@ const EmailModalComponent = ({ price, preset }) => {
       return;
     }
 
-    // Inside handlePayment in checkout.js
-    const amountInRupees = 799; // Or get from cart, input, etc.
+    const amountInRupees = price; // Set this from props or state
+    if (!amountInRupees || amountInRupees <= 0) {
+      alert("Invalid amount");
+      return;
+    }
+
+    // Step 1: Create order from backend
     const response = await fetch("/api/create-order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ amount: amountInRupees }), // 💰 send rupee value
+      body: JSON.stringify({ amount: amountInRupees }),
     });
 
     const data = await response.json();
 
+    if (!data.id) {
+      alert("Failed to create Razorpay order");
+      return;
+    }
+
+    // Step 2: Razorpay Checkout options
     const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // from Razorpay Dashboard
-      amount: data.amount, // in paise (i.e., ₹1 = 100)
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount: data.amount,
       currency: data.currency,
-      name: "My Store",
+      name: "lg.presets",
       description: "Purchase Description",
       order_id: data.id,
-      handler: function (response) {
-        alert("Payment ID: " + response.razorpay_payment_id);
-        alert("Order ID: " + response.razorpay_order_id);
-        alert("Signature: " + response.razorpay_signature);
-        // Send response to your backend for verification
+
+      // ✅ Payment success handler
+      handler: async function (response) {
+        console.log("✅ Payment success", response);
+
+        // Step 3: Verify payment on backend
+        const verifyRes = await fetch("/api/verify-payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(response),
+        });
+
+        const verifyResult = await verifyRes.json();
+
+        if (verifyResult.success) {
+          router.push("/confirm-payment");
+        } else {
+          alert("⚠️ Payment verification failed.");
+        }
       },
 
       theme: {
@@ -51,6 +79,12 @@ const EmailModalComponent = ({ price, preset }) => {
     };
 
     const rzp = new Razorpay(options);
+
+    // ❌ Payment failed handler
+    rzp.on("payment.failed", function (response) {
+      alert("Payment failed: " + response.error.description);
+    });
+
     rzp.open();
   };
 
