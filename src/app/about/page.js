@@ -54,19 +54,22 @@ const AboutUs = () => {
       name: "Jose C S",
       role: "Creative Director",
       bio: "Professional photographer with 8+ years creating cinematic looks for brands worldwide.",
-      gradient: "from-blue-500 to-purple-500",
+      image:
+        "https://masterbundles.com/wp-content/uploads/2024/07/gangsta_rap_3d_avatar-1-772-490x490.jpg",
     },
     {
       name: "Jaseem K",
       role: "Color Grading Expert",
       bio: "Film industry veteran specializing in creating mood-driven color palettes for storytelling.",
-      gradient: "from-purple-500 to-pink-500",
+      image:
+        "https://masterbundles.com/wp-content/uploads/2024/07/gangsta_rap_3d_avatar-1-772-490x490.jpg",
     },
     {
       name: "Radih Myran",
       role: "Technical Lead",
       bio: "Ensuring every preset works flawlessly across all platforms and editing software.",
-      gradient: "from-teal-500 to-blue-500",
+      image:
+        "https://masterbundles.com/wp-content/uploads/2024/07/gangsta_rap_3d_avatar-1-772-490x490.jpg",
     },
   ];
 
@@ -118,7 +121,7 @@ const AboutUs = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16">
+      <section className="py-1 pb-10">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -157,7 +160,7 @@ const AboutUs = () => {
       </section>
 
       {/* Story Section */}
-      <section className="py-20">
+      <section className="py-10">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
@@ -336,7 +339,7 @@ const AboutUs = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20">
+      <section className="py-5">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2
@@ -365,10 +368,13 @@ const AboutUs = () => {
                     : "bg-white/50 border-white/50"
                 } hover:scale-105 transition-all duration-300`}
               >
-                <div
-                  className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${member.gradient} mx-auto mb-6 flex items-center justify-center`}
-                >
-                  <div className="w-16 h-16 rounded-xl bg-white/20 backdrop-blur-sm"></div>
+                <div className="w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                  {/* Replace gradient with image */}
+                  <img
+                    src={member.image} // Assuming `member.image` contains the image URL
+                    alt={member.name} // Always include alt text for accessibility
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
                 </div>
                 <h3
                   className={`text-xl font-semibold mb-2 ${

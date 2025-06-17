@@ -3,10 +3,17 @@
 import React from "react";
 import { Github, Linkedin, Instagram } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
-
-export default function Footer({ navItems, scrollToSection }) {
+import { useRouter } from "next/navigation";
+export default function Footer() {
   const { isDarkMode: darkMode } = useThemeContext();
-
+  const staticNavItems = [
+    { name: "Home", href: "/" },
+    { name: "Explore", href: "/explore" },
+    { name: "About", href: "/about" },
+    { name: "Guide", href: "/guide" },
+    { name: "Support", href: "/support" },
+  ];
+  const router = useRouter();
   return (
     <footer
       className={`py-12 ${
@@ -19,16 +26,17 @@ export default function Footer({ navItems, scrollToSection }) {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-              Vexel
+              lg.presets
             </h3>
             <p
               className={`mb-6 max-w-md ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Creating digital experiences that drive results. From custom
-              websites to full-stack applications, we bring your vision to life
-              with cutting-edge technology and beautiful design.
+              Explore our collection of premium Lightroom and video presets
+              designed to instantly elevate your photos and videos. Whether
+              you're a photographer or content creator, our presets help you
+              achieve a consistent and professional look in just one click.
             </p>
             <div className="flex space-x-4">
               {[Github, Linkedin, Instagram].map((Icon, index) => (
@@ -54,10 +62,10 @@ export default function Footer({ navItems, scrollToSection }) {
               Quick Links
             </h4>
             <ul className="space-y-2">
-              {navItems.map((item) => (
+              {staticNavItems.map((item) => (
                 <li key={item.name}>
                   <button
-                    onClick={() => scrollToSection(item.href)}
+                    onClick={() => router.push(item.href)}
                     className={`hover:text-blue-600 transition-colors ${
                       darkMode
                         ? "text-gray-300 hover:text-blue-400"
@@ -77,7 +85,7 @@ export default function Footer({ navItems, scrollToSection }) {
                 darkMode ? "text-gray-300" : "text-gray-800"
               }`}
             >
-              Services
+              Other Services
             </h4>
             <ul
               className={`${
@@ -99,7 +107,7 @@ export default function Footer({ navItems, scrollToSection }) {
             darkMode ? "border-gray-800" : "border-gray-200"
           } text-center`}
         >
-          <p>© 2025 Vexel. All rights reserved.</p>
+          <p>© 2025 Decorno. All rights reserved.</p>
         </div>
       </div>
     </footer>

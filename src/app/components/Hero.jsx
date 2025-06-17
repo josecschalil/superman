@@ -1,8 +1,13 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { MessageCircle, Share2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Hero = ({ darkMode, scrollToSection }) => {
+  const router = useRouter();
+  const handleExplore = () => {
+    router.push("/explore");
+  };
   return (
     <section
       id="home"
@@ -53,7 +58,7 @@ const Hero = ({ darkMode, scrollToSection }) => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <button
-              onClick={() => scrollToSection && scrollToSection("#contact")}
+              onClick={handleExplore}
               className="group px-8 py-4 font-semibold rounded-2xl flex items-center justify-center sm:justify-start
 
                     bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"

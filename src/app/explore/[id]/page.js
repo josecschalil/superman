@@ -1,6 +1,7 @@
 "use client";
 
 import React, { use, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Star,
   Heart,
@@ -30,6 +31,10 @@ const ProductDetailPage = ({ params }) => {
   const [error, setError] = useState(null);
   const unwrappedParams = use(params);
   const id = unwrappedParams.id;
+  const router = useRouter();
+  const handleExplore = () => {
+    router.push("/explore");
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -554,6 +559,7 @@ const ProductDetailPage = ({ params }) => {
                 </button>
 
                 <button
+                  onClick={handleExplore}
                   className={`w-full px-6 py-4 border-2 font-semibold rounded-xl transition-all duration-300 ${themeClasses.buttonSecondary}`}
                 >
                   Explore More

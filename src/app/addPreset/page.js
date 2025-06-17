@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useCallback } from "react";
+import { useAuth } from "../hooks/useAuth";
+
 import {
   Upload,
   Image,
@@ -13,6 +15,7 @@ import {
 import { useThemeContext } from "../context/ThemeContext";
 
 const PresetFormPage = () => {
+  const { user } = useAuth();
   const { darkMode } = useThemeContext();
   const [formData, setFormData] = useState({
     title: "",
@@ -131,263 +134,275 @@ const PresetFormPage = () => {
     }
   }, [formData, validateForm]);
 
-  return (
-    <div
-      className={`min-h-screen pt-20 pb-20 ${
-        darkMode
-          ? "bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900"
-          : "bg-gradient-to-br from-blue-50 via-white to-purple-50"
-      }`}
-    >
-      <div className="max-w-4xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className={`${darkMode ? "text-gray-100" : "text-gray-900"}`}>
-              Create New
-            </span>
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
-              Preset Pack
-            </span>
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-6"></div>
-          <p
-            className={`text-lg ${
-              darkMode ? "text-gray-300" : "text-gray-600"
-            }`}
-          >
-            Fill in the details for your new preset pack and make it available
-            for download
-          </p>
-        </div>
-
-        {/* Form */}
-        <div className="space-y-8">
-          {/* Main Content Card */}
-          <div
-            className={`rounded-3xl p-8 shadow-2xl border backdrop-blur-lg ${
-              darkMode
-                ? "bg-gray-800/20 border-gray-700/30"
-                : "bg-white/40 border-white/50"
-            }`}
-          >
-            {/* Basic Information */}
-            <div className="space-y-6 mb-8">
-              <h2
-                className={`text-2xl font-bold flex items-center gap-3 ${
-                  darkMode ? "text-gray-100" : "text-gray-900"
-                }`}
+  if (user) {
+    return (
+      <div
+        className={`min-h-screen pt-35 pb-20 ${
+          darkMode
+            ? "bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900"
+            : "bg-gradient-to-br from-blue-50 via-white to-purple-50"
+        }`}
+      >
+        <div className="max-w-4xl mx-auto px-6">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <span
+                className={`${darkMode ? "text-gray-100" : "text-gray-900"}`}
               >
-                <FileText className="w-6 h-6 text-purple-600" />
-                Basic Information
-              </h2>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <InputField
-                  label="Pack Title"
-                  field="title"
-                  placeholder="Enter preset pack title"
-                  icon={Tag}
-                  required
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-                <InputField
-                  label="Subtitle"
-                  field="subtitle"
-                  placeholder="Enter pack subtitle"
-                  icon={Tag}
-                  required
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
-
-              <InputField
-                label="Description"
-                field="description"
-                placeholder="Describe your preset pack in detail..."
-                icon={FileText}
-                multiline
-                required
-                formData={formData}
-                errors={errors}
-                darkMode={darkMode}
-                handleInputChange={handleInputChange}
-              />
-            </div>
-
-            {/* Images Section */}
-            <div className="space-y-6 mb-8">
-              <h2
-                className={`text-2xl font-bold flex items-center gap-3 ${
-                  darkMode ? "text-gray-100" : "text-gray-900"
-                }`}
-              >
-                <Image className="w-6 h-6 text-purple-600" />
-                Images
-              </h2>
-
-              {errors.imageLinks && (
-                <p className="text-red-500 text-sm">{errors.imageLinks}</p>
-              )}
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <InputField
-                  label="Image Link 1"
-                  field="imageLink1"
-                  placeholder="https://example.com/image1.jpg"
-                  icon={Link}
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-                <InputField
-                  label="Image Link 2"
-                  field="imageLink2"
-                  placeholder="https://example.com/image2.jpg"
-                  icon={Link}
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-                <InputField
-                  label="Image Link 3"
-                  field="imageLink3"
-                  placeholder="https://example.com/image3.jpg"
-                  icon={Link}
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-                <InputField
-                  label="Image Link 4"
-                  field="imageLink4"
-                  placeholder="https://example.com/image4.jpg"
-                  icon={Link}
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
-
-              <InputField
-                label="Thumbnail Image"
-                field="thumbnailLink"
-                placeholder="https://example.com/thumbnail.jpg"
-                icon={Eye}
-                required
-                formData={formData}
-                errors={errors}
-                darkMode={darkMode}
-                handleInputChange={handleInputChange}
-              />
-            </div>
-
-            {/* Pricing & Links */}
-            <div className="space-y-6">
-              <h2
-                className={`text-2xl font-bold flex items-center gap-3 ${
-                  darkMode ? "text-gray-100" : "text-gray-900"
-                }`}
-              >
-                <DollarSign className="w-6 h-6 text-purple-600" />
-                Pricing & Download
-              </h2>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <InputField
-                  label="Price"
-                  field="price"
-                  type="number"
-                  placeholder="99.00"
-                  icon={DollarSign}
-                  required
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-                <InputField
-                  label="Discounted Price"
-                  field="discountedPrice"
-                  type="number"
-                  placeholder="79.00 (optional)"
-                  icon={DollarSign}
-                  formData={formData}
-                  errors={errors}
-                  darkMode={darkMode}
-                  handleInputChange={handleInputChange}
-                />
-              </div>
-
-              <InputField
-                label="Download Link"
-                field="downloadLink"
-                placeholder="https://drive.google.com/file/d/..."
-                icon={Upload}
-                required
-                formData={formData}
-                errors={errors}
-                darkMode={darkMode}
-                handleInputChange={handleInputChange}
-              />
-            </div>
+                Create New
+              </span>
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
+                Preset Pack
+              </span>
+            </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-6"></div>
+            <p
+              className={`text-lg ${
+                darkMode ? "text-gray-300" : "text-gray-600"
+              }`}
+            >
+              Fill in the details for your new preset pack and make it available
+              for download
+            </p>
           </div>
 
-          {/* Submit Button */}
-          <div className="flex justify-center">
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className={`group px-12 py-4 font-bold text-lg rounded-2xl flex items-center gap-3 
+          {/* Form */}
+          <div className="space-y-8">
+            {/* Main Content Card */}
+            <div
+              className={`rounded-3xl p-8 shadow-2xl border backdrop-blur-lg ${
+                darkMode
+                  ? "bg-gray-800/20 border-gray-700/30"
+                  : "bg-white/40 border-white/50"
+              }`}
+            >
+              {/* Basic Information */}
+              <div className="space-y-6 mb-8">
+                <h2
+                  className={`text-2xl font-bold flex items-center gap-3 ${
+                    darkMode ? "text-gray-100" : "text-gray-900"
+                  }`}
+                >
+                  <FileText className="w-6 h-6 text-purple-600" />
+                  Basic Information
+                </h2>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <InputField
+                    label="Pack Title"
+                    field="title"
+                    placeholder="Enter preset pack title"
+                    icon={Tag}
+                    required
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                  <InputField
+                    label="Subtitle"
+                    field="subtitle"
+                    placeholder="Enter pack subtitle"
+                    icon={Tag}
+                    required
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                </div>
+
+                <InputField
+                  label="Description"
+                  field="description"
+                  placeholder="Describe your preset pack in detail..."
+                  icon={FileText}
+                  multiline
+                  required
+                  formData={formData}
+                  errors={errors}
+                  darkMode={darkMode}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
+
+              {/* Images Section */}
+              <div className="space-y-6 mb-8">
+                <h2
+                  className={`text-2xl font-bold flex items-center gap-3 ${
+                    darkMode ? "text-gray-100" : "text-gray-900"
+                  }`}
+                >
+                  <Image className="w-6 h-6 text-purple-600" />
+                  Images
+                </h2>
+
+                {errors.imageLinks && (
+                  <p className="text-red-500 text-sm">{errors.imageLinks}</p>
+                )}
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <InputField
+                    label="Image Link 1"
+                    field="imageLink1"
+                    placeholder="https://example.com/image1.jpg"
+                    icon={Link}
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                  <InputField
+                    label="Image Link 2"
+                    field="imageLink2"
+                    placeholder="https://example.com/image2.jpg"
+                    icon={Link}
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                  <InputField
+                    label="Image Link 3"
+                    field="imageLink3"
+                    placeholder="https://example.com/image3.jpg"
+                    icon={Link}
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                  <InputField
+                    label="Image Link 4"
+                    field="imageLink4"
+                    placeholder="https://example.com/image4.jpg"
+                    icon={Link}
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                </div>
+
+                <InputField
+                  label="Thumbnail Image"
+                  field="thumbnailLink"
+                  placeholder="https://example.com/thumbnail.jpg"
+                  icon={Eye}
+                  required
+                  formData={formData}
+                  errors={errors}
+                  darkMode={darkMode}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
+
+              {/* Pricing & Links */}
+              <div className="space-y-6">
+                <h2
+                  className={`text-2xl font-bold flex items-center gap-3 ${
+                    darkMode ? "text-gray-100" : "text-gray-900"
+                  }`}
+                >
+                  <DollarSign className="w-6 h-6 text-purple-600" />
+                  Pricing & Download
+                </h2>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <InputField
+                    label="Price"
+                    field="price"
+                    type="number"
+                    placeholder="99.00"
+                    icon={DollarSign}
+                    required
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                  <InputField
+                    label="Discounted Price"
+                    field="discountedPrice"
+                    type="number"
+                    placeholder="79.00 (optional)"
+                    icon={DollarSign}
+                    formData={formData}
+                    errors={errors}
+                    darkMode={darkMode}
+                    handleInputChange={handleInputChange}
+                  />
+                </div>
+
+                <InputField
+                  label="Download Link"
+                  field="downloadLink"
+                  placeholder="https://drive.google.com/file/d/..."
+                  icon={Upload}
+                  required
+                  formData={formData}
+                  errors={errors}
+                  darkMode={darkMode}
+                  handleInputChange={handleInputChange}
+                />
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-center">
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className={`group px-12 py-4 font-bold text-lg rounded-2xl flex items-center gap-3 
                 bg-gradient-to-r from-blue-600 to-purple-600 text-white 
                 hover:shadow-2xl hover:shadow-purple-500/25 
                 transform hover:scale-105 transition-all duration-300
                 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
               `}
-            >
-              {isSubmitting ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Saving...
-                </>
-              ) : (
-                <>
-                  <Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                  Save Preset Pack
-                </>
-              )}
-            </button>
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Saving...
+                  </>
+                ) : (
+                  <>
+                    <Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    Save Preset Pack
+                  </>
+                )}
+              </button>
+            </div>
           </div>
-        </div>
 
-        {/* Floating Elements for Visual Appeal - Hidden on mobile */}
-        <div
-          className={`hidden lg:block fixed top-32 right-8 w-16 h-16 rounded-2xl shadow-lg animate-pulse rotate-12 pointer-events-none ${
-            darkMode
-              ? "bg-gradient-to-br from-yellow-400 to-orange-500"
-              : "bg-gradient-to-br from-yellow-300 to-yellow-400"
-          }`}
-        ></div>
-        <div
-          className={`hidden lg:block fixed bottom-32 left-8 w-12 h-12 rounded-xl shadow-lg animate-pulse -rotate-12 pointer-events-none ${
-            darkMode
-              ? "bg-gradient-to-br from-pink-400 to-red-500"
-              : "bg-gradient-to-br from-pink-300 to-pink-400"
-          }`}
-        ></div>
+          {/* Floating Elements for Visual Appeal - Hidden on mobile */}
+          <div
+            className={`hidden lg:block fixed top-32 right-8 w-16 h-16 rounded-2xl shadow-lg animate-pulse rotate-12 pointer-events-none ${
+              darkMode
+                ? "bg-gradient-to-br from-yellow-400 to-orange-500"
+                : "bg-gradient-to-br from-yellow-300 to-yellow-400"
+            }`}
+          ></div>
+          <div
+            className={`hidden lg:block fixed bottom-32 left-8 w-12 h-12 rounded-xl shadow-lg animate-pulse -rotate-12 pointer-events-none ${
+              darkMode
+                ? "bg-gradient-to-br from-pink-400 to-red-500"
+                : "bg-gradient-to-br from-pink-300 to-pink-400"
+            }`}
+          ></div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h1 className="text-2xl font-bold text-gray-800">
+          You do not have permission to access this page.
+        </h1>
+      </div>
+    );
+  }
 };
 
 // Separate InputField component to prevent re-renders

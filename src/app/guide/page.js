@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   ChevronDown,
   ChevronUp,
@@ -205,6 +206,10 @@ const FAQ = () => {
       faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+  const router = useRouter();
+  const handleContact = () => {
+    router.push("/support");
+  };
 
   return (
     <div
@@ -427,7 +432,10 @@ const FAQ = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="group px-8 py-4 font-semibold rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300">
+              <button
+                onClick={handleContact}
+                className="group px-8 py-4 font-semibold rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"
+              >
                 Contact Support
                 <MessageCircle className="inline-block ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
               </button>

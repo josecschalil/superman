@@ -5,8 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import { usePathname, useRouter } from "next/navigation";
 const NavBar = ({ navItems, onMobileMenuToggle }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
@@ -63,6 +62,10 @@ const NavBar = ({ navItems, onMobileMenuToggle }) => {
       clearTimeout(timeoutId);
     };
   }, []);
+  const router = useRouter();
+  const handleStart = () => {
+    router.push("/explore");
+  };
 
   return (
     <nav
@@ -147,7 +150,7 @@ const NavBar = ({ navItems, onMobileMenuToggle }) => {
 
             <div className="hidden lg:block">
               <button
-                onClick={() => scrollToSection("#contact")}
+                onClick={handleStart}
                 className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"
                 aria-label="Get Started"
               >
@@ -237,11 +240,7 @@ const NavBar = ({ navItems, onMobileMenuToggle }) => {
             )}
             <div className="pt-2">
               <button
-                onClick={() => {
-                  scrollToSection("#contact");
-                  setMobileMenuOpen(false);
-                  onMobileMenuToggle?.(false);
-                }}
+                onClick={handleStart}
                 className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
                 role="menuitem"
               >
