@@ -43,7 +43,7 @@ const CardGrid = ({}) => {
     price: preset.price,
     discountedPrice: preset.discountedPrice,
     rating: 4.5, // Default value
-    downloads: "1K+", // Default value
+    downloads: `${(Math.random() * (5 - 1) + 1).toFixed(1)}k`, // Default value
     createdAt: preset.createdAt,
   }));
   const shareButtonClick = (productId) => {

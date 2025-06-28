@@ -84,9 +84,29 @@ export default function Footer() {
         <div
           className={`mt-12 pt-8 border-t ${
             darkMode ? "border-gray-800" : "border-gray-200"
-          } text-center`}
+          } text-center text-sm text-gray-500 space-y-2`}
         >
-          <p>© 2025 Superman All rights reserved.</p>
+          <p>© 2025 Superman. All rights reserved.</p>
+          <div className="space-x-4">
+            <a
+              href="https://merchant.razorpay.com/policy/Qi4eJKBWdFRhYJ/privacy"
+              className="hover:underline"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="https://merchant.razorpay.com/policy/Qi4eJKBWdFRhYJ/terms"
+              className="hover:underline"
+            >
+              Terms & Conditions
+            </a>
+            <a
+              href="https://merchant.razorpay.com/policy/Qi4eJKBWdFRhYJ/refund"
+              className="hover:underline"
+            >
+              Cancellation & Refund
+            </a>
+          </div>
         </div>
       </div>
     </footer>
