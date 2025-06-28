@@ -22,7 +22,7 @@ export default function useTheme() {
       localStorage.setItem("theme", "dark");
       document.documentElement.classList.add("dark");
     } else {
-      localStorage.setItem("theme", "light");
+      localStorage.setItem("theme", "dark");
       document.documentElement.classList.remove("dark");
     }
   };
