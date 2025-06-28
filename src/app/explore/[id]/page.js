@@ -101,10 +101,6 @@ const ProductDetailPage = ({ params }) => {
         "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
       presets.imageLink2 ||
         "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-      presets.imageLink3 ||
-        "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
-      presets.imageLink4 ||
-        "https://images.unsplash.com/photo-1682695796954-bad0d0f59ff1?q=80&w=800&auto=format&fit=crop",
     ],
     variants: [
       {
@@ -135,29 +131,33 @@ const ProductDetailPage = ({ params }) => {
     features: [
       {
         icon: Download,
-        text: "Instant Download",
-        desc: "Get access immediately",
+        text: "Instant Access",
+        desc: "Stream or download your tracks immediately",
       },
       {
         icon: Sparkles,
-        text: "AI-Enhanced",
-        desc: "Machine learning optimized",
+        text: "Curated by Experts",
+        desc: "Handpicked playlists by top musicians and DJs",
       },
       {
         icon: Eye,
-        text: "Mobile Compatible",
-        desc: "Works on phones & tablets",
+        text: "Mobile Friendly",
+        desc: "Enjoy your music on any device",
       },
-      { icon: Users, text: "Commercial License", desc: "Use for client work" },
+      {
+        icon: Users,
+        text: "Royalty-Free License",
+        desc: "Use tracks freely in videos, podcasts, and more",
+      },
       {
         icon: Award,
-        text: "Award Winning",
-        desc: "Top rated by professionals",
+        text: "Critically Acclaimed",
+        desc: "Loved by artists and producers worldwide",
       },
       {
         icon: Zap,
-        text: "One-Click Magic",
-        desc: "Transform photos instantly",
+        text: "Mood-Based Playlists",
+        desc: "Discover music that matches your vibe",
       },
     ],
     stats: [
@@ -330,27 +330,6 @@ const ProductDetailPage = ({ params }) => {
             </div>
           </div>
 
-          {/* Mobile Thumbnail gallery */}
-          <div className="grid grid-cols-4 gap-3">
-            {product.images.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveImageIndex(index)}
-                className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                  index === activeImageIndex
-                    ? "border-blue-600 scale-[1.02]"
-                    : "border-gray-300 hover:scale-[1.02] opacity-70 hover:opacity-100"
-                }`}
-              >
-                <img
-                  src={image}
-                  alt={`Thumbnail ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </button>
-            ))}
-          </div>
-
           {/* Mobile Stats */}
           <div
             className={`grid grid-cols-3 gap-4 p-6 rounded-2xl border ${themeClasses.cardBg}`}
@@ -382,6 +361,9 @@ const ProductDetailPage = ({ params }) => {
                   src={product.images[activeImageIndex]}
                   alt={`${product.name} - Image ${activeImageIndex + 1}`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://i.ibb.co/LX4Bphbv/1.jpg";
+                  }}
                 />
 
                 <button
@@ -413,27 +395,6 @@ const ProductDetailPage = ({ params }) => {
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* Desktop Thumbnail gallery */}
-            <div className="grid grid-cols-4 gap-3">
-              {product.images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveImageIndex(index)}
-                  className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                    index === activeImageIndex
-                      ? "border-blue-600 scale-[1.02]"
-                      : "border-gray-300 hover:scale-[1.02] opacity-70 hover:opacity-100"
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`Thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
             </div>
 
             {/* Desktop Stats */}
@@ -522,13 +483,13 @@ const ProductDetailPage = ({ params }) => {
             <div className={`p-6 rounded-2xl border ${themeClasses.cardBg}`}>
               <div className="flex items-center gap-4 mb-6">
                 <span className={`text-3xl font-bold ${themeClasses.text}`}>
-                  ${product.price}
+                  ₹{product.price}
                 </span>
                 {product.originalPrice > product.price && (
                   <span
                     className={`text-lg line-through ${themeClasses.textMuted}`}
                   >
-                    ${product.originalPrice}
+                    ₹{product.originalPrice}
                   </span>
                 )}
                 <span className="px-3 py-1 text-sm bg-green-600 text-white font-bold rounded-lg">
@@ -600,92 +561,6 @@ const ProductDetailPage = ({ params }) => {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Reviews Section */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h2 className={`text-3xl font-bold mb-4 ${themeClasses.text}`}>
-              What Creators Are Saying
-            </h2>
-            <p className={`text-lg ${themeClasses.textSecondary}`}>
-              Join thousands of satisfied customers
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {reviews.map((review) => (
-              <div
-                key={review.id}
-                className={`p-6 rounded-2xl border ${themeClasses.cardBg}`}
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative">
-                    <img
-                      src={review.avatar}
-                      alt={review.name}
-                      className="w-12 h-12 rounded-xl object-cover"
-                    />
-                    {review.verified && (
-                      <div className="absolute -bottom-1 -right-1 p-1 bg-green-500 rounded-full">
-                        <Check className="w-3 h-3 text-white" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <div>
-                        <h4 className={`font-semibold ${themeClasses.text}`}>
-                          {review.name}
-                        </h4>
-                        <p className={`text-sm ${themeClasses.accent}`}>
-                          {review.title}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < review.rating
-                                ? "text-yellow-400 fill-current"
-                                : "text-gray-300"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <span className={`text-sm ${themeClasses.textMuted}`}>
-                        {review.date}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <p
-                  className={`leading-relaxed mb-4 ${themeClasses.textSecondary}`}
-                >
-                  "{review.review}"
-                </p>
-
-                <div className="flex items-center justify-between text-sm">
-                  <button
-                    className={`flex items-center gap-1 font-medium hover:text-blue-600 transition-colors ${themeClasses.textMuted}`}
-                  >
-                    <Heart className="w-4 h-4" />
-                    Helpful ({review.helpful})
-                  </button>
-                  {review.verified && (
-                    <div className="flex items-center gap-1 text-green-600 font-medium">
-                      <Check className="w-4 h-4" />
-                      Verified Purchase
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

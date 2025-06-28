@@ -9,6 +9,8 @@ import {
   Target,
   Star,
   CheckCircle,
+  Headphones,
+  Music,
 } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
 
@@ -16,36 +18,36 @@ const AboutUs = () => {
   const { isDarkMode: darkMode } = useThemeContext();
 
   const stats = [
-    { number: "10K+", label: "Happy Creators", icon: Users },
-    { number: "500+", label: "Premium Presets", icon: Camera },
-    { number: "50+", label: "LUT Collections", icon: Award },
-    { number: "99%", label: "Satisfaction Rate", icon: Heart },
+    { number: "25K+", label: "Happy Listeners", icon: Users },
+    { number: "5+", label: "Curated Playlists", icon: Award },
+    { number: "1M+", label: "Streams & Shares", icon: Headphones },
+    { number: "50+", label: "Genres & Moods Covered", icon: Music },
   ];
 
   const values = [
     {
       icon: Target,
-      title: "Quality First",
+      title: "Curated Quality",
       description:
-        "Every preset is meticulously crafted and tested to ensure professional-grade results that elevate your creative work.",
+        "Every playlist is handpicked with precision, blending tracks that flow seamlessly to create the perfect vibe.",
     },
     {
       icon: Zap,
-      title: "Innovation",
+      title: "Fresh Sounds",
       description:
-        "We stay ahead of trends, constantly developing new styles and techniques to keep your content fresh and engaging.",
+        "We stay ahead of the curve, updating playlists with trending tracks and hidden gems to keep your music fresh.",
     },
     {
       icon: Heart,
-      title: "Community",
+      title: "For the Soul",
       description:
-        "Building a supportive community of creators who inspire each other to push creative boundaries and grow together.",
+        "Crafted with emotion and intention, our playlists connect deeply — whether you're working, driving, or unwinding.",
     },
     {
       icon: CheckCircle,
-      title: "Reliability",
+      title: "Always On Point",
       description:
-        "Consistent, high-quality presets that work seamlessly across different lighting conditions and subjects.",
+        "Reliable mood-matching playlists that suit every moment, from focused study sessions to weekend getaways.",
     },
   ];
 
@@ -94,13 +96,13 @@ const AboutUs = () => {
               About Our Story
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
               <span
                 className={`block ${
                   darkMode ? "text-gray-100" : "text-gray-900"
                 }`}
               >
-                Crafting Visual
+                Crafting Musical
               </span>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent py-1">
                 Excellence
@@ -108,13 +110,15 @@ const AboutUs = () => {
             </h1>
 
             <p
-              className={`text-xl leading-relaxed max-w-3xl mx-auto ${
+              className={`text-lg leading-relaxed max-w-3xl mx-auto ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              We're passionate creators dedicated to helping photographers and
-              videographers transform their vision into stunning reality through
-              premium presets and LUTs.
+              I don’t make playlists.I just craft experiences. Every song is
+              handpicked with feeling, not just rhythm. I believe music can
+              speak when words fall short. From late-night moods to sunlit
+              drives, there’s a vibe for everything. Welcome to my world, one
+              track at a time.
             </p>
           </div>
         </div>
@@ -181,11 +185,14 @@ const AboutUs = () => {
                   darkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                What began as a personal quest to perfect our own photography
-                quickly evolved into something bigger. We realized that many
-                creators were struggling with the same challenges— spending
-                hours trying to achieve that perfect look, only to feel
-                frustrated with inconsistent results.
+                After years of curating playlists late into the night, pouring
+                emotions into every track, Aanya was just another unheard music
+                lover with a passion no one noticed. She’d post snippets on
+                Instagram — quiet reels, moody captions, and zero likes. Friends
+                told her to give up, but she kept going, believing someone out
+                there would feel what she felt. One rainy evening, she shared a
+                reel titled *“For the ones who feel too much”* — a raw, honest
+                collection of indie tracks that mirrored her soul.
               </p>
 
               <p
@@ -193,10 +200,11 @@ const AboutUs = () => {
                   darkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                That's when we decided to share our carefully crafted presets
-                and LUTs with the world. Each preset is born from real shooting
-                scenarios, tested across various conditions, and refined until
-                it delivers that professional magic every single time.
+                It exploded overnight. Comments flooded in from strangers saying
+                it felt like the soundtrack to their lives. From invisible to
+                viral, Aanya’s playlist became a refuge for thousands — proof
+                that sometimes, all it takes is one post to turn quiet passion
+                into something unforgettable.
               </p>
 
               <div className="flex items-center space-x-4 pt-4">
@@ -215,60 +223,183 @@ const AboutUs = () => {
                     darkMode ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
-                  Trusted by thousands of creators worldwide
+                  Trusted by thousands of listeners in Kerala
                 </span>
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative w-full max-w-md mx-auto">
               <div
-                className={`rounded-3xl p-8 backdrop-blur-sm border ${
+                className={`rounded-2xl p-6 backdrop-blur-md border shadow-lg transition-all duration-300 hover:shadow-2xl transform hover:scale-105 ${
                   darkMode
-                    ? "bg-gray-800/20 border-gray-700/30"
-                    : "bg-white/30 border-white/50"
+                    ? "bg-gray-900/60 border-gray-700/40"
+                    : "bg-white/60 border-gray-300/60"
                 }`}
               >
-                <div className="space-y-4">
-                  <div
-                    className={`h-4 rounded animate-pulse ${
-                      darkMode
-                        ? "bg-gradient-to-r from-blue-800 to-purple-800"
-                        : "bg-gradient-to-r from-blue-200 to-purple-200"
-                    }`}
-                  ></div>
-                  <div
-                    className={`h-4 rounded animate-pulse delay-75 w-3/4 ${
-                      darkMode
-                        ? "bg-gradient-to-r from-purple-800 to-teal-800"
-                        : "bg-gradient-to-r from-purple-200 to-teal-200"
-                    }`}
-                  ></div>
-                  <div
-                    className={`h-32 rounded-xl animate-pulse delay-150 ${
-                      darkMode
-                        ? "bg-gradient-to-br from-gray-700 to-gray-800"
-                        : "bg-gradient-to-br from-gray-100 to-gray-200"
-                    }`}
-                  ></div>
-                  <div className="grid grid-cols-3 gap-2">
-                    {[1, 2, 3].map((i) => (
+                <div className="flex flex-col space-y-4">
+                  {/* Album Art */}
+                  <div className="relative h-48 w-full rounded-xl overflow-hidden group cursor-pointer">
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 animate-pulse"></div>
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                        <svg
+                          className="w-8 h-8 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Track Info */}
+                  <div className="space-y-2">
+                    <h3
+                      className={`text-lg font-bold truncate ${
+                        darkMode ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      വരുവാനില്ലാരുമീ വിജനമാ..
+                    </h3>
+                    <p
+                      className={`text-sm truncate ${
+                        darkMode ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      Manichithrathazhu • Superman
+                    </p>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="space-y-2">
+                    <div className="relative h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div
-                        key={i}
-                        className={`h-8 rounded animate-pulse ${
-                          darkMode
-                            ? "bg-gradient-to-r from-teal-800 to-blue-800"
-                            : "bg-gradient-to-r from-teal-200 to-blue-200"
-                        }`}
-                        style={{ animationDelay: `${i * 75}ms` }}
+                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-300"
+                        style={{ width: "40%" }}
                       ></div>
-                    ))}
+                    </div>
+                    <div
+                      className={`flex justify-between text-xs ${
+                        darkMode ? "text-gray-400" : "text-gray-500"
+                      }`}
+                    >
+                      <span>1:32</span>
+                      <span>4:00</span>
+                    </div>
+                  </div>
+
+                  {/* Controls */}
+                  <div className="flex items-center justify-between">
+                    <button
+                      className={`p-2 rounded-full transition-colors ${
+                        darkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"
+                      }`}
+                    >
+                      <svg
+                        className={`w-5 h-5 ${
+                          darkMode ? "text-gray-300" : "text-gray-600"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                    </button>
+
+                    <div className="flex items-center space-x-4">
+                      <button
+                        className={`p-2 rounded-full transition-colors ${
+                          darkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"
+                        }`}
+                      >
+                        <svg
+                          className={`w-5 h-5 ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M6 6h2v12H6zm3.5 6l8.5 6V6l-8.5 6z" />
+                        </svg>
+                      </button>
+
+                      <button className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110">
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </button>
+
+                      <button
+                        className={`p-2 rounded-full transition-colors ${
+                          darkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"
+                        }`}
+                      >
+                        <svg
+                          className={`w-5 h-5 ${
+                            darkMode ? "text-gray-300" : "text-gray-600"
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <button
+                      className={`p-2 rounded-full transition-colors ${
+                        darkMode ? "hover:bg-gray-800" : "hover:bg-gray-100"
+                      }`}
+                    >
+                      <svg
+                        className={`w-5 h-5 ${
+                          darkMode ? "text-gray-300" : "text-gray-600"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M6.343 6.343a8 8 0 000 11.314"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
               </div>
 
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg animate-pulse rotate-12"></div>
-              <div className="absolute -bottom-6 -left-6 w-16 h-16 rounded-xl bg-gradient-to-br from-pink-400 to-red-500 shadow-lg animate-pulse -rotate-12"></div>
+              {/* Floating Elements */}
+              <div className="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 shadow-lg animate-bounce"></div>
+              <div className="absolute -bottom-4 -left-4 w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-red-500 shadow-lg animate-pulse"></div>
+
+              {/* Sound waves decoration */}
+              <div className="absolute top-1/2 -left-8 flex flex-col space-y-1 opacity-30">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-1 bg-gradient-to-t from-purple-500 to-pink-500 rounded-full animate-pulse"
+                    style={{
+                      height: `${Math.random() * 20 + 10}px`,
+                      animationDelay: `${i * 150}ms`,
+                    }}
+                  ></div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -338,69 +469,8 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-5">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2
-              className={`text-4xl font-bold mb-4 ${
-                darkMode ? "text-white" : "text-gray-900"
-              }`}
-            >
-              Meet the Creative Minds
-            </h2>
-            <p
-              className={`text-lg ${
-                darkMode ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
-              The passionate team behind every preset
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <div
-                key={index}
-                className={`text-center p-8 rounded-2xl backdrop-blur-sm border ${
-                  darkMode
-                    ? "bg-gray-800/20 border-gray-700/30"
-                    : "bg-white/50 border-white/50"
-                } hover:scale-105 transition-all duration-300`}
-              >
-                <div className="w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
-                  {/* Replace gradient with image */}
-                  <img
-                    src={member.image} // Assuming `member.image` contains the image URL
-                    alt={member.name} // Always include alt text for accessibility
-                    className="w-full h-full object-cover rounded-2xl"
-                  />
-                </div>
-                <h3
-                  className={`text-xl font-semibold mb-2 ${
-                    darkMode ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {member.name}
-                </h3>
-                <div className="text-blue-600 font-medium mb-4">
-                  {member.role}
-                </div>
-                <p
-                  className={`text-sm leading-relaxed ${
-                    darkMode ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
-                  {member.bio}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-10">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div
             className={`p-12 rounded-3xl backdrop-blur-sm border ${
@@ -414,18 +484,18 @@ const AboutUs = () => {
                 darkMode ? "text-white" : "text-gray-900"
               }`}
             >
-              Ready to Transform Your Creative Work?
+              Ready to Feel Every Beat?
             </h2>
             <p
               className={`text-lg mb-8 ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Join thousands of creators who've elevated their photography and
-              videography with our premium presets.
+              Join thousands of music lovers discovering handpicked playlists
+              made to match every mood, moment, and memory.
             </p>
             <button className="group px-8 py-4 font-semibold rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300">
-              Explore Our Presets
+              Explore Our Playlists
               <Camera className="inline-block ml-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
             </button>
           </div>

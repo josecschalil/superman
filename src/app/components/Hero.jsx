@@ -30,7 +30,7 @@ const Hero = ({ darkMode, scrollToSection }) => {
                 Every
               </span>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
-                Great Edit
+                Great Music
               </span>
               <span className={`block ${darkMode ? "text-gray-100" : ""}`}>
                 Starts Here.
@@ -50,9 +50,9 @@ const Hero = ({ darkMode, scrollToSection }) => {
               darkMode ? "text-gray-300" : ""
             }`}
           >
-            Elevate your photos and videos with our premium presets and
-            LUTs—designed to transform your edits into stunning,
-            professional-grade art. Fast, easy, and endlessly inspiring.
+            Welcome to the playlist holds the echoes of moments I never want to
+            forget. Each track is a page from the diary of my soul — raw,
+            honest, and timeless. From quiet nights to chaotic days.
           </p>
 
           {/* CTA Buttons */}
@@ -63,12 +63,12 @@ const Hero = ({ darkMode, scrollToSection }) => {
 
                     bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"
             >
-              Explore Presets
+              Get your Playlist
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() =>
-                window.open("https://wa.me/?text=+917012048527", "_blank")
+                window.open("https://wa.me/?text=+919121689741", "_blank")
               }
               className={`flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-xl transition-all duration-300 ${
                 darkMode
@@ -127,7 +127,7 @@ const Hero = ({ darkMode, scrollToSection }) => {
                         }
                       `}
                     >
-                      yourwebsite.com
+                      supermansplaylist.com
                     </div>
                   </div>
                 </div>

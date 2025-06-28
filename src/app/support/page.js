@@ -4,10 +4,9 @@ import {
   Mail,
   Phone,
   MessageCircle,
-  MapPin,
+  Globe,
   Send,
   Clock,
-  Globe,
   Star,
   CheckCircle,
   AlertCircle,
@@ -101,16 +100,16 @@ const ContactUs = () => {
       icon: Mail,
       title: "Email Us",
       subtitle: "Get in touch via email",
-      value: "hello@presetstore.com",
-      action: "mailto:hello@presetstore.com",
+      value: "supermansplaylist@gmail.com",
+      action: "mailto:supermansplaylist@gmail.com",
       gradient: "from-blue-500 to-purple-500",
     },
     {
       icon: Phone,
       title: "Call Us",
       subtitle: "Speak with our team",
-      value: "+91 70120 48527",
-      action: "tel:+917012048527",
+      value: "+91 9121689741",
+      action: "tel:+919121689741",
       gradient: "from-purple-500 to-pink-500",
     },
     {
@@ -118,39 +117,39 @@ const ContactUs = () => {
       title: "WhatsApp",
       subtitle: "Quick chat on WhatsApp",
       value: "Chat Now",
-      action: "https://wa.me/917012048527",
+      action: "https://wa.me/919121689741",
       gradient: "from-green-500 to-teal-500",
     },
     {
-      icon: MapPin,
-      title: "Location",
-      subtitle: "Our headquarters",
-      value: "Kanayannur, Kerala, IN",
-      action: "#",
-      gradient: "from-teal-500 to-blue-500",
+      icon: Globe,
+      title: "Follow Us",
+      subtitle: "Stay updated on Instagram",
+      value: "@supermansplaylist",
+      action: "https://instagram.com/supermans_playlist",
+      gradient: "from-pink-500 to-yellow-500",
     },
   ];
 
   const faqs = [
     {
-      question: "How quickly will I receive my presets?",
+      question: "How soon can I access my downloads?",
       answer:
-        "Digital downloads are available immediately after purchase. You'll receive an email with download links within minutes.",
+        "All music packs and tools are available for instant download right after purchase. A download link will be sent to your email immediately.",
     },
     {
-      question: "What software do your presets work with?",
+      question: "What software are your sound packs compatible with?",
       answer:
-        "Our presets are compatible with Lightroom, Photoshop, and most popular editing software. Each product page lists specific compatibility.",
+        "Our sound packs work with all major DAWs including Ableton Live, FL Studio, Logic Pro, and more. Compatibility details are listed on each product page.",
     },
     {
-      question: "Do you offer refunds?",
+      question: "Do you offer refunds on digital products?",
       answer:
-        "We offer a 30-day satisfaction guarantee. If you're not happy with your purchase, we'll provide a full refund.",
+        "Yes, we offer a 14-day satisfaction guarantee. If you're not happy with your purchase, contact us and we’ll make it right.",
     },
     {
-      question: "Can I use presets for commercial work?",
+      question: "Can I use these sounds in commercial projects?",
       answer:
-        "Yes! All our presets come with a commercial license, so you can use them for client work and commercial projects.",
+        "Absolutely! All our products include a royalty-free commercial license. Use them in your songs, beats, or client work with full confidence.",
     },
   ];
 
@@ -179,10 +178,10 @@ const ContactUs = () => {
                   darkMode ? "text-gray-100" : "text-gray-900"
                 }`}
               >
-                Let's Create
+                Turn Up the Volume of
               </span>
-              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent py-1">
-                Together
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent py-2">
+                Your World.
               </span>
             </h1>
 

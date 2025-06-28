@@ -7,11 +7,11 @@ import {
   Search,
   HelpCircle,
   Star,
-  Camera,
-  Download,
-  CreditCard,
+  Music,
+  PlayCircle,
+  User,
   Shield,
-  Zap,
+  LifeBuoy,
   Users,
   MessageCircle,
 } from "lucide-react";
@@ -28,7 +28,6 @@ const FAQ = () => {
       [index]: !prev[index],
     }));
   };
-
   const categories = [
     {
       id: "all",
@@ -37,164 +36,110 @@ const FAQ = () => {
       color: "from-blue-500 to-purple-500",
     },
     {
-      id: "presets",
-      name: "Presets & LUTs",
-      icon: Camera,
+      id: "playlists",
+      name: "Playlists",
+      icon: Music,
       color: "from-purple-500 to-pink-500",
     },
     {
-      id: "download",
-      name: "Downloads",
-      icon: Download,
+      id: "spotify",
+      name: "Spotify",
+      icon: PlayCircle,
       color: "from-green-500 to-teal-500",
     },
     {
-      id: "payment",
-      name: "Payment & Billing",
-      icon: CreditCard,
+      id: "account",
+      name: "Account",
+      icon: User,
       color: "from-orange-500 to-red-500",
     },
     {
       id: "support",
-      name: "Technical Support",
-      icon: Zap,
+      name: "Support",
+      icon: LifeBuoy,
       color: "from-teal-500 to-blue-500",
     },
     {
-      id: "licensing",
-      name: "Licensing",
-      icon: Shield,
-      color: "from-indigo-500 to-purple-500",
+      id: "collab",
+      name: "Collaboration",
+      icon: Users,
+      color: "from-pink-500 to-yellow-500",
     },
   ];
 
   const faqData = [
     {
-      category: "presets",
-      question: "What editing software do your presets work with?",
+      category: "playlists",
+      question: "What kind of playlists do you offer?",
       answer:
-        "Our presets are primarily designed for Adobe Lightroom (both Classic and CC versions). We also offer Photoshop actions and Capture One styles for selected collections. Each product page clearly indicates compatibility. Most of our LUTs work with popular video editing software like Premiere Pro, Final Cut Pro, and DaVinci Resolve.",
+        "We curate Spotify playlists across moods and genres — from chill lo-fi beats to high-energy workout mixes, romantic evenings, and deep focus sessions.",
     },
     {
-      category: "presets",
-      question: "How do I install presets in Lightroom?",
+      category: "playlists",
+      question: "How often are your playlists updated?",
       answer:
-        'Installation is simple! After downloading, open Lightroom and go to the Develop module. In the Presets panel, right-click and select "Import Presets." Navigate to your downloaded .lrtemplate or .xmp files and select them. The presets will appear in a new folder in your presets panel. We include detailed installation guides with every purchase.',
+        "Our playlists are refreshed regularly, with new tracks added weekly or biweekly to keep the vibe fresh and relevant.",
     },
     {
-      category: "presets",
-      question: "Can I adjust the presets after applying them?",
+      category: "playlists",
+      question: "Can I request a custom playlist?",
       answer:
-        "Absolutely! Our presets are designed as starting points for your creativity. After applying a preset, you can adjust any setting including exposure, contrast, highlights, shadows, and color grading. This flexibility allows you to customize the look to match your specific image and style preferences.",
+        "Yes! We love creating personalized playlists. Reach out through our contact form or Instagram with your mood or occasion, and we'll curate something special.",
     },
     {
-      category: "presets",
-      question: "Do presets work on RAW and JPEG files?",
+      category: "playlists",
+      question: "Where can I listen to the playlists?",
       answer:
-        "Yes, our presets work on both RAW and JPEG files. However, RAW files provide much better results due to their greater dynamic range and color information. RAW files allow for more dramatic adjustments without quality loss, while JPEG files have more limitations in post-processing flexibility.",
+        "All playlists are hosted on Spotify. Each collection on our site includes a direct link that opens in the Spotify app or web player.",
     },
     {
-      category: "presets",
-      question: "What's the difference between presets and LUTs?",
+      category: "spotify",
+      question: "Do I need a Spotify Premium account?",
       answer:
-        "Presets are primarily for photo editing in software like Lightroom and contain various adjustment settings. LUTs (Look-Up Tables) are color grading tools mainly used in video editing and can also work with photos. LUTs focus specifically on color transformation, while presets can include exposure, contrast, and other photographic adjustments.",
+        "No, you can listen with a free Spotify account. However, Premium users enjoy ad-free listening, better sound quality, and offline access.",
     },
     {
-      category: "download",
-      question: "How quickly can I download my presets after purchase?",
+      category: "spotify",
+      question: "Can I save the playlists to my own Spotify account?",
       answer:
-        "Downloads are available immediately after successful payment! You'll receive an email with download links within 2-3 minutes of purchase completion. The email includes direct download links and detailed installation instructions. If you don't receive the email, check your spam folder or contact our support team.",
-    },
-    {
-      category: "download",
-      question: "How long are download links valid?",
-      answer:
-        "Your download links remain active for 30 days from the date of purchase, with unlimited downloads during this period. We recommend downloading and backing up your files immediately. If your links expire, contact our support team with your order number, and we'll provide fresh download links at no charge.",
-    },
-    {
-      category: "download",
-      question: "What file formats do you provide?",
-      answer:
-        "We provide multiple formats for maximum compatibility: .lrtemplate files for older Lightroom versions, .xmp files for newer versions, and .cube files for LUTs. Each download includes installation guides and preview images. Video presets come in various formats including .cube, .3dl, and software-specific formats.",
-    },
-    {
-      category: "download",
-      question: "Can I re-download my presets if I lose them?",
-      answer:
-        "Yes! Keep your order confirmation email with the download links, as they remain valid for 30 days. After that period, contact our support team with your order number and email address. We maintain purchase records and can provide fresh download links for all your past purchases.",
-    },
-    {
-      category: "payment",
-      question: "What payment methods do you accept?",
-      answer:
-        "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Google Pay, Apple Pay, and various local payment methods depending on your region. All transactions are processed securely through industry-standard encryption. You'll receive an invoice via email after each purchase.",
-    },
-    {
-      category: "payment",
-      question: "Do you offer refunds?",
-      answer:
-        "Yes, we offer a 30-day satisfaction guarantee on all purchases. If you're not completely happy with your presets, contact us within 30 days for a full refund. Please note that due to the digital nature of our products, we may ask for feedback to help us improve our offerings.",
-    },
-    {
-      category: "payment",
-      question: "Are there any subscription fees?",
-      answer:
-        "No, all our presets are one-time purchases with no recurring fees. Once you buy a preset pack, it's yours forever. You can use the presets on unlimited personal projects without any additional costs. We occasionally offer bundle deals and seasonal discounts for even better value.",
-    },
-    {
-      category: "payment",
-      question: "Can I purchase presets as a gift?",
-      answer:
-        "Absolutely! During checkout, you can specify a different email address for delivery, or forward the download links to your recipient. We also offer digital gift cards that allow recipients to choose their own presets. Contact us if you need a custom gift certificate or special presentation.",
+        "Absolutely! Just click the 'heart' icon or 'Save to Library' on Spotify to keep any playlist in your account for quick access.",
     },
     {
       category: "support",
-      question: "Why don't presets look the same on my photos?",
+      question: "The playlist link isn’t working. What should I do?",
       answer:
-        "This is completely normal! Presets are designed to work across various lighting conditions and subjects, but every photo is unique. Factors like original lighting, white balance, exposure, and subject matter affect the final result. Always feel free to adjust the preset settings to match your specific image perfectly.",
+        "Try opening the link in the Spotify app or web player. If it still doesn't work, contact us and we'll send you a fresh link.",
     },
     {
       category: "support",
-      question: "My presets aren't showing up in Lightroom. What should I do?",
+      question: "Can I suggest songs or themes for future playlists?",
       answer:
-        "First, ensure you've imported the presets correctly into the Develop module. Try restarting Lightroom after installation. Check that you're using the correct file format for your Lightroom version. If issues persist, our support team can provide detailed troubleshooting steps and even schedule a quick screen-share session to help.",
+        "Definitely! We welcome your suggestions. Send them through our contact form or DM us — your favorite tracks might be featured next!",
     },
     {
-      category: "support",
+      category: "content",
       question:
-        "Can you help me choose the right presets for my photography style?",
+        "Can I use your playlists for public or commercial use (e.g., in a café)?",
       answer:
-        "Of course! We love helping photographers find their perfect style. Contact us with some sample images and a description of your preferred aesthetic. Our team can recommend specific preset collections that match your vision. We also offer preview galleries and before/after examples for every preset pack.",
+        "Our playlists are for personal enjoyment only. Spotify’s terms prohibit public or commercial playback without a commercial license from them.",
     },
     {
-      category: "support",
-      question: "Do you offer tutorials on how to use presets effectively?",
+      category: "content",
+      question: "Can I download the songs from your playlists?",
       answer:
-        "Yes! We provide comprehensive tutorials including installation guides, usage tips, and creative techniques. Our blog features regular articles on preset application, photo editing workflows, and style development. We also share video tutorials on our social media channels and offer one-on-one consultation sessions.",
+        "No — downloading songs from our playlists is not possible through our site. Spotify handles all playback and licensing directly.",
     },
     {
-      category: "licensing",
-      question: "Can I use presets for commercial photography?",
+      category: "account",
+      question: "Do I need an account on your website to access the playlists?",
       answer:
-        "Yes! All our presets come with a commercial license included in the purchase price. You can use them for client work, stock photography, social media marketing, and any commercial projects. The license covers unlimited usage for your business without additional fees or royalties.",
+        "No account is needed! Just browse our collections and click to listen on Spotify. It’s quick and completely free.",
     },
     {
-      category: "licensing",
-      question: "Can I share presets with my team or other photographers?",
+      category: "collaboration",
+      question: "Do you collaborate with curators or independent artists?",
       answer:
-        "Our standard license covers individual use. For teams or studios, we offer special multi-user licenses at discounted rates. Contact us with details about your team size and usage requirements. We can create a custom licensing agreement that meets your needs while respecting our creators' work.",
-    },
-    {
-      category: "licensing",
-      question: "Am I allowed to modify and resell your presets?",
-      answer:
-        "No, our license doesn't permit redistribution or resale of the presets, even if modified. You can certainly adjust them for your own use and use them in your commercial work, but the presets themselves cannot be shared, sold, or distributed. This protects both our creators and maintains the value of original work.",
-    },
-    {
-      category: "licensing",
-      question: "What happens to my license if I upgrade my editing software?",
-      answer:
-        "Your license remains valid regardless of software upgrades! If you upgrade to a newer version of Lightroom or switch to compatible software, you can continue using your presets. We often provide updated file formats for major software updates, and existing customers receive these updates free of charge.",
+        "Yes! If you’re a curator, artist, or producer and want to collaborate or get featured, feel free to reach out. We're all about community and discovery.",
     },
   ];
 
@@ -248,9 +193,9 @@ const FAQ = () => {
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Find quick answers to common questions about our presets,
-              downloads, licensing, and more. Can't find what you're looking
-              for? Our support team is here to help!
+              Find quick answers to common questions about our playlists,
+              Spotify access, account help, and more. Can’t find what you’re
+              looking for? Our support team is just a message away!
             </p>
           </div>
         </div>

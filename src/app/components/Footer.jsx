@@ -26,17 +26,18 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-              lg.presets
+              Superman's Playlist
             </h3>
             <p
               className={`mb-6 max-w-md ${
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Explore our collection of premium Lightroom and video presets
-              designed to instantly elevate your photos and videos. Whether
-              you're a photographer or content creator, our presets help you
-              achieve a consistent and professional look in just one click.
+              These songs aren't just melodies — they’re memories. Each one
+              holds a moment, a feeling, a piece of me. They've been with me in
+              silence, in joy, and in chaos. This playlist is a safe place, a
+              familiar rhythm. Listen closely, you might just hear my heart
+              sing.
             </p>
             <div className="flex space-x-4">
               {[Github, Linkedin, Instagram].map((Icon, index) => (
@@ -78,28 +79,6 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-          <div className="text-right sm:text-left">
-            <h4
-              className={`font-semibold mb-4 ${
-                darkMode ? "text-gray-300" : "text-gray-800"
-              }`}
-            >
-              Other Services
-            </h4>
-            <ul
-              className={`${
-                darkMode ? "text-gray-300" : "text-gray-600"
-              } space-y-2`}
-            >
-              <li>Custom Websites</li>
-              <li>Full-Stack Development</li>
-              <li>Responsive Design</li>
-              <li>Performance Optimization</li>
-              <li>SEO & Analytics</li>
-              <li>Ongoing Support</li>
-            </ul>
-          </div>
         </div>
 
         <div
@@ -107,7 +86,7 @@ export default function Footer() {
             darkMode ? "border-gray-800" : "border-gray-200"
           } text-center`}
         >
-          <p>© 2025 Decorno. All rights reserved.</p>
+          <p>© 2025 Superman All rights reserved.</p>
         </div>
       </div>
     </footer>

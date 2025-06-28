@@ -54,7 +54,7 @@ export default function DownloadConfirmPage() {
       const mailData = {
         type: "download",
         downloadLink: link,
-        fileName: name || "Preset Pack",
+        fileName: name || "Playlist Link",
         recipientEmail: sentMail,
       };
 
@@ -89,10 +89,10 @@ export default function DownloadConfirmPage() {
 
         const data = await response.json();
         setDownloadLink(data.downloadLink);
-        setFileName(data.title || "preset-pack");
+        setFileName(data.title || "playlist-link");
 
         if (!hasMailSent) {
-          await handleMail(data.downloadLink, data.title || "preset-pack");
+          await handleMail(data.downloadLink, data.title || "playlist-link");
         }
       } catch (error) {
         console.error("Download error:", error);
@@ -149,7 +149,7 @@ export default function DownloadConfirmPage() {
         }`}
       >
         <div className="text-center py-8 text-red-500">
-          Error loading presets: {error}
+          Error loading link: {error}
         </div>
       </div>
     );
@@ -172,14 +172,14 @@ export default function DownloadConfirmPage() {
               isDarkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            {downloadStarted ? "Download Complete" : "No Download Available"}
+            {downloadStarted ? "Purchase Complete" : "No Data Available"}
           </h1>
           <p
             className={`mb-6 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}
           >
             {downloadStarted
-              ? "Your download has been started. Check your downloads folder."
-              : "No active download found. Please return to the product page."}
+              ? "Check your mail for playlist Link."
+              : "No active purchase found. Please return to the product page."}
           </p>
           {downloadStarted && (
             <button
@@ -189,7 +189,7 @@ export default function DownloadConfirmPage() {
               }`}
             >
               <Download className="w-5 h-5" />
-              Download Again
+              Get Link Again
             </button>
           )}
         </div>
@@ -268,7 +268,7 @@ export default function DownloadConfirmPage() {
                     isDarkMode ? "text-green-400" : "text-green-600"
                   }`}
                 >
-                  Download started successfully!
+                  Purchased successfully!
                 </p>
               </div>
             )}
@@ -284,9 +284,7 @@ export default function DownloadConfirmPage() {
               }`}
             >
               <Download className="w-5 h-5" />
-              {downloadStarted
-                ? "Download Again"
-                : "Click here if it doesn't start automatically"}
+              {downloadStarted ? "Get Link" : "Try it again"}
             </button>
           )}
 
@@ -296,8 +294,8 @@ export default function DownloadConfirmPage() {
             }`}
           >
             {downloadLink
-              ? "Having trouble? Check your downloads folder or contact support."
-              : "Please wait while we prepare your download..."}
+              ? "Having trouble? Check your mail or contact support."
+              : "Please wait while we prepare playlist..."}
           </p>
         </div>
       </div>

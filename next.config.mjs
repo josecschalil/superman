@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ["masterbundles.com"],
-  },
   // Add environment variables that should be available server-side
   env: {
     EMAIL_USER: process.env.EMAIL_USER,

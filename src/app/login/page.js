@@ -53,7 +53,7 @@ const LoginPage = ({ onLoginSuccess }) => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                className="text-gray-800 w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                 placeholder="Enter your username"
                 required
               />
@@ -70,7 +70,7 @@ const LoginPage = ({ onLoginSuccess }) => {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                className="text-gray-800 w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                 placeholder="Enter your password"
                 required
               />
@@ -109,20 +109,6 @@ const LoginPage = ({ onLoginSuccess }) => {
               "Sign In"
             )}
           </button>
-        </div>
-
-        <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-          <p className="text-sm text-gray-600 mb-2">Demo Credentials:</p>
-          <div className="text-xs text-gray-500 space-y-1">
-            <div>
-              Username:{" "}
-              <span className="font-mono bg-white px-1 rounded">admin</span>
-            </div>
-            <div>
-              Password:{" "}
-              <span className="font-mono bg-white px-1 rounded">admin123</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

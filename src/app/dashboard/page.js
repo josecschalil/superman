@@ -82,18 +82,7 @@ const DashboardPage = () => {
                   className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors space-x-2"
                 >
                   <Upload className="w-4 h-4" />
-                  <span>Go to Upload Presets</span>
-                </a>
-
-                {/* Alternative: External link button */}
-                <a
-                  href="https://example.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors space-x-2 ml-4"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>External Link</span>
+                  <span>Go to Upload Playlist</span>
                 </a>
               </div>
             </div>

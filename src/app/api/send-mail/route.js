@@ -28,8 +28,8 @@ export async function POST(request) {
       case "contact":
         const { name, email, subject, message, category } = requestData;
         mailOptions = {
-          from: `"Decorno Contact" <${process.env.EMAIL_USER}>`,
-          to: "josecschalil2101@gmail.com",
+          from: `"Superman Contact" <${process.env.EMAIL_USER}>`,
+          to: "supermansplaylist@gmail.com",
           subject: `${subject} (${category})`,
           text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
           html: `
@@ -51,13 +51,13 @@ export async function POST(request) {
         }
 
         mailOptions = {
-          from: `"Decorno Downloads" <${process.env.EMAIL_USER}>`,
+          from: `"Superman's Playlist" <${process.env.EMAIL_USER}>`,
           to: recipientEmail || "josecschalil2101@gmail.com",
-          subject: `Your Download: ${fileName || "Preset Pack"}`,
-          text: `Here's your download link: ${downloadLink}`,
+          subject: `Your Playlist Link: ${fileName || "Playlist Link"}`,
+          text: `Here's your playlist link: ${downloadLink}`,
           html: `
             <h2>Thank you for your purchase!</h2>
-            <p>Your download is ready:</p>
+            <p>Your songs are ready:</p>
             <a href="${downloadLink}" style="
               display: inline-block;
               padding: 10px 20px;
@@ -66,12 +66,12 @@ export async function POST(request) {
               text-decoration: none;
               border-radius: 5px;
               margin: 10px 0;
-            ">Download ${fileName || "Preset Pack"}</a>
+            ">Enjoy it ${fileName || "Playlist Link"}</a>
             <p>This link will expire in 24 hours.</p>
             <p>If you didn't request this, please ignore this email.</p>
           `,
         };
-        responseMessage = "Download link sent successfully";
+        responseMessage = "Playlist link sent successfully";
         break;
 
       default:

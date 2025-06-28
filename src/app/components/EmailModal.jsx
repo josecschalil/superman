@@ -47,7 +47,7 @@ const EmailModalComponent = ({ price, preset }) => {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
       amount: data.amount,
       currency: data.currency,
-      name: "lg.presets",
+      name: "Superman's Playlist",
       description: "Purchase Description",
       order_id: data.id,
 
@@ -162,7 +162,7 @@ const EmailModalComponent = ({ price, preset }) => {
         aria-haspopup="dialog"
       >
         <ShoppingCart className="w-5 h-5" />
-        <span>Buy Now - ${price}</span>
+        <span>Buy Now - ₹{price}</span>
       </button>
 
       {/* Modal */}
@@ -202,7 +202,7 @@ const EmailModalComponent = ({ price, preset }) => {
                   id="modal-title"
                   className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                 >
-                  Get Download Link
+                  Get Playlist Link
                 </h2>
               </div>
 
@@ -226,8 +226,8 @@ const EmailModalComponent = ({ price, preset }) => {
                   isDarkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                Enter your email address below. We'll send you a download link
-                to access your purchase.
+                Enter your email address below. We'll send you a link to access
+                our playlist.
               </p>
 
               <div className="mb-6">

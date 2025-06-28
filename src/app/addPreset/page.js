@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import { useAuth } from "../hooks/useAuth";
-
 import {
   Upload,
   Image,
@@ -16,7 +15,8 @@ import { useThemeContext } from "../context/ThemeContext";
 
 const PresetFormPage = () => {
   const { user } = useAuth();
-  const { darkMode } = useThemeContext();
+  const { isDarkMode: darkMode } = useThemeContext();
+
   const [formData, setFormData] = useState({
     title: "",
     subtitle: "",
@@ -61,7 +61,7 @@ const PresetFormPage = () => {
     if (!formData.thumbnailLink.trim())
       newErrors.thumbnailLink = "Thumbnail link is required";
     if (!formData.downloadLink.trim())
-      newErrors.downloadLink = "Download link is required";
+      newErrors.downloadLink = "Playlist link is required";
 
     // Validate at least one image link
     const imageLinks = [
@@ -103,14 +103,14 @@ const PresetFormPage = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to save preset pack");
+        throw new Error(errorData.error || "Failed to save playlist pack");
       }
 
       const result = await response.json();
-      console.log("Preset pack saved:", result);
+      console.log("Playlist pack saved:", result);
 
       // Success feedback
-      alert("Preset pack saved successfully!");
+      alert("Playlist pack saved successfully!");
 
       // Reset form
       setFormData({
@@ -127,8 +127,8 @@ const PresetFormPage = () => {
         thumbnailLink: "",
       });
     } catch (error) {
-      console.error("Error saving preset pack:", error);
-      alert("Error saving preset pack: " + error.message);
+      console.error("Error saving playlist pack:", error);
+      alert("Error saving playlist pack: " + error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -153,7 +153,7 @@ const PresetFormPage = () => {
                 Create New
               </span>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
-                Preset Pack
+                Playlist Pack
               </span>
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mb-6"></div>
@@ -162,8 +162,8 @@ const PresetFormPage = () => {
                 darkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Fill in the details for your new preset pack and make it available
-              for download
+              Fill in the details for your new playlist pack and make it
+              available to share
             </p>
           </div>
 
@@ -192,7 +192,7 @@ const PresetFormPage = () => {
                   <InputField
                     label="Pack Title"
                     field="title"
-                    placeholder="Enter preset pack title"
+                    placeholder="Enter playlist pack title"
                     icon={Tag}
                     required
                     formData={formData}
@@ -216,7 +216,7 @@ const PresetFormPage = () => {
                 <InputField
                   label="Description"
                   field="description"
-                  placeholder="Describe your preset pack in detail..."
+                  placeholder="Describe your playlist pack in detail..."
                   icon={FileText}
                   multiline
                   required
@@ -369,7 +369,7 @@ const PresetFormPage = () => {
                 ) : (
                   <>
                     <Save className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                    Save Preset Pack
+                    Save Playlist Pack
                   </>
                 )}
               </button>

@@ -104,9 +104,9 @@ const CardGrid = ({}) => {
                 darkMode ? "text-gray-100" : "text-gray-900"
               }`}
             >
-              Our Premium
+              Our Playlist
             </span>
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 bg-clip-text text-transparent py-1">
               Collection
             </span>
           </h2>
@@ -116,8 +116,8 @@ const CardGrid = ({}) => {
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            Discover our handcrafted presets and LUTs designed by professional
-            photographers and filmmakers
+            Discover playlists thoughtfully curated by music lovers and experts
+            to match every mood and moment.
           </p>
         </div>
 
@@ -141,7 +141,7 @@ const CardGrid = ({}) => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
                     e.target.src =
-                      "https://masterbundles.com/wp-content/uploads/2023/02/preview--379-1.jpg?w=400&h=400&fit=crop&crop=center";
+                      "https://drive.usercontent.google.com/download?id=1RiAfiDzk1UuIHue4oVddeauAXguDumG-&export=view";
                   }}
                 />
 
@@ -175,15 +175,15 @@ const CardGrid = ({}) => {
                   {card.discountedPrice && card.discountedPrice < card.price ? (
                     <>
                       <span className="px-2 sm:px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs sm:text-sm font-semibold">
-                        ${card.discountedPrice}
+                        ₹ {card.discountedPrice}
                       </span>
-                      <span className="line-through text-xs text-gray-400">
-                        ${card.price}
+                      <span className="line-through text-md text-gray-100">
+                        ₹{card.price}
                       </span>
                     </>
                   ) : (
                     <span className="px-2 sm:px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs sm:text-sm font-semibold">
-                      ${card.price}
+                      ₹{card.price}
                     </span>
                   )}
                 </div>
@@ -273,7 +273,7 @@ const CardGrid = ({}) => {
               // Add view all functionality
             }}
           >
-            View All Presets
+            View All Playlists
             <Download className="inline-block ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-1 transition-transform" />
           </button>
         </div>

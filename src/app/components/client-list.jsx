@@ -14,7 +14,7 @@ export default function DownloadsList() {
       try {
         const response = await fetch("/api/download-marker");
         if (!response.ok) {
-          throw new Error("Failed to fetch downloads");
+          throw new Error("Failed to fetch Link");
         }
         const data = await response.json();
         setDownloads(data);
@@ -33,7 +33,7 @@ export default function DownloadsList() {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="flex flex-col items-center space-y-4">
           <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-          <p className="text-slate-600 font-medium">Loading downloads...</p>
+          <p className="text-slate-600 font-medium">Loading Playlist...</p>
         </div>
       </div>
     );
@@ -68,13 +68,13 @@ export default function DownloadsList() {
             <div className="p-2 bg-blue-100 rounded-lg">
               <Download className="h-6 w-6 text-blue-600" />
             </div>
-            <h1 className="text-3xl font-bold text-slate-900">Downloads</h1>
+            <h1 className="text-3xl font-bold text-slate-900">Purchase</h1>
           </div>
           <p className="text-slate-600">
-            Manage and track your download history
+            Manage and track your purchase history
           </p>
           <div className="mt-4 text-sm text-slate-500">
-            Total downloads:{" "}
+            Total purchase:{" "}
             <span className="font-semibold text-blue-600">
               {downloads.length}
             </span>
@@ -86,10 +86,10 @@ export default function DownloadsList() {
           <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-12 text-center">
             <Download className="h-12 w-12 text-slate-400 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-slate-900 mb-2">
-              No downloads yet
+              No purchases yet
             </h3>
             <p className="text-slate-600">
-              Your downloads will appear here once you start downloading.
+              Your purchases will appear here once you start downloading.
             </p>
           </div>
         ) : (
@@ -115,7 +115,7 @@ export default function DownloadsList() {
                       <th className="text-left py-4 px-6 font-semibold text-slate-900">
                         <div className="flex items-center space-x-2">
                           <Download className="h-4 w-4" />
-                          <span>Preset ID</span>
+                          <span>Purchase ID</span>
                         </div>
                       </th>
                     </tr>
@@ -133,9 +133,6 @@ export default function DownloadsList() {
                                 {index + 1}
                               </span>
                             </div>
-                            <span className="font-mono text-sm text-slate-900">
-                              {download.id}
-                            </span>
                           </div>
                         </td>
                         <td className="py-4 px-6">

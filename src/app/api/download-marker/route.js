@@ -27,9 +27,9 @@ export async function GET() {
 
     return NextResponse.json(downloads, { headers: corsHeaders });
   } catch (error) {
-    console.error("Error fetching downloads:", error);
+    console.error("Error fetching Link:", error);
     return NextResponse.json(
-      { error: "Failed to fetch download records" },
+      { error: "Failed to fetch playlist records" },
       { status: 500, headers: corsHeaders }
     );
   }
