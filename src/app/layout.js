@@ -13,7 +13,7 @@ const navItems = [
   { name: "Explore", href: "/explore" },
   { name: "About", href: "/about" },
   { name: "Guide", href: "/guide" },
-  { name: "Support", href: "/support" },
+  { name: "Support", href: "/contact" },
 ];
 
 // Visit counter hook

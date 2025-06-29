@@ -11,7 +11,7 @@ export default function Footer() {
     { name: "Explore", href: "/explore" },
     { name: "About", href: "/about" },
     { name: "Guide", href: "/guide" },
-    { name: "Support", href: "/support" },
+    { name: "Support", href: "/contact" },
   ];
   const router = useRouter();
   return (
@@ -88,23 +88,17 @@ export default function Footer() {
         >
           <p>© 2025 Superman. All rights reserved.</p>
           <div className="space-x-4">
-            <a
-              href="https://merchant.razorpay.com/policy/Qi4eJKBWdFRhYJ/privacy"
-              className="hover:underline"
-            >
+            <a href="/privacy" className="hover:underline">
               Privacy Policy
             </a>
-            <a
-              href="https://merchant.razorpay.com/policy/Qi4eJKBWdFRhYJ/terms"
-              className="hover:underline"
-            >
+            <a href="/terms" className="hover:underline">
               Terms & Conditions
             </a>
-            <a
-              href="https://merchant.razorpay.com/policy/Qi4eJKBWdFRhYJ/refund"
-              className="hover:underline"
-            >
+            <a href="/refund" className="hover:underline">
               Cancellation & Refund
+            </a>
+            <a href="/shipping" className="hover:underline">
+              Shipping Policy
             </a>
           </div>
         </div>
