@@ -4,8 +4,8 @@ import { X, Mail } from "lucide-react";
 import { useThemeContext } from "../context/ThemeContext";
 import { loadRazorpayScript } from "@/lib/razorpay";
 import { useRouter } from "next/navigation";
-import { ShoppingCart } from "lucide-react";
-const EmailModalComponent = ({ price, preset }) => {
+import { Share2, MessageCircle } from "lucide-react";
+const EmailModalComponent = ({ price, preset, name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
   const [email, setEmail] = useState("");
@@ -155,14 +155,22 @@ const EmailModalComponent = ({ price, preset }) => {
 
   return (
     <>
-      {/* Button */}
       <button
-        onClick={() => setIsOpen(true)}
-        className="px-2 py-4 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-md font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"
-        aria-haspopup="dialog"
+        onClick={() =>
+          window.open(
+            `https://wa.me/919121689441?text=Hi%2C%20I'm%20interested%20in%20your%20playlist!%20Please%20send%20me%20the%20link%20for%20${name}.`,
+            "_blank"
+          )
+        }
+        className={`px-2 py-4 w-full flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300 ${
+          isDarkMode
+            ? "bg-green-600 hover:bg-green-700 text-white"
+            : "bg-green-500 hover:bg-green-600 text-white"
+        }`}
       >
-        <ShoppingCart className="w-5 h-5" />
-        <span>Buy Now - ₹{price}</span>
+        <Share2 className="w-auto h-auto px-1 pl-2" />
+        <span>Chat with Superman</span>
+        <MessageCircle className="w-auto h-auto" />
       </button>
 
       {/* Modal */}

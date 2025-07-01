@@ -518,6 +518,7 @@ const ProductDetailPage = ({ params }) => {
                 <EmailModalComponent
                   price={product.price}
                   preset={product.preset}
+                  name={product.name}
                 />
 
                 <button
